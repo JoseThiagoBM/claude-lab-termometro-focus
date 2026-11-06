@@ -153,15 +153,15 @@ def montar(resumo: dict, analise: str, saida: Path | None = None) -> str:
     motor = _esc(MOTORES.get(resumo.get('motor_analise'), resumo.get('motor_analise') or 'motor não informado'))
     return f'''<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Compasso — Termômetro do Focus — {data}</title></head>
+<title>Termômetro do Focus — {data}</title></head>
 <body style="margin:0;padding:0;background:{COR['fundo']};font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;color:{COR['texto']}">
 <div aria-hidden="true" style="display:none;max-height:0;max-width:0;overflow:hidden;opacity:0;mso-hide:all;font-size:1px;line-height:1px;color:#ffffff;background:#ffffff">Focus de {data} · {n_alertas} alerta(s) nesta semana.</div>
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" bgcolor="{COR['fundo']}" style="background:{COR['fundo']}"><tr><td align="center" style="padding:16px 4px">
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff" style="max-width:640px;background:#ffffff;border:1px solid {COR['borda']}">
 <tr><td bgcolor="#ffffff" style="padding:28px 16px;background:#ffffff;border-top:6px solid {COR['marca']};color:{COR['texto']}">
 <table role="presentation" cellspacing="0" cellpadding="0" style="margin:0 0 18px;background:#ffffff"><tr>
-<td width="40" height="40" align="center" bgcolor="{COR['marca']}" aria-hidden="true" style="width:40px;height:40px;background:{COR['marca']};color:#ffffff;font-family:Georgia,serif;font-size:30px;line-height:40px">C</td>
-<td style="padding-left:10px;background:#ffffff;color:{COR['marca']}"><h1 style="margin:0;font-family:Georgia,serif;font-size:22px;font-weight:normal;letter-spacing:2px">COMPASSO</h1><span style="font-size:11px;letter-spacing:1px">TERMÔMETRO DO FOCUS</span></td>
+<td width="40" height="40" align="center" bgcolor="{COR['marca']}" aria-hidden="true" style="width:40px;height:40px;background:{COR['marca']};color:#ffffff;font-family:Georgia,serif;font-size:24px;line-height:40px">TF</td>
+<td style="padding-left:10px;background:#ffffff;color:{COR['marca']}"><h1 style="margin:0;font-family:Georgia,serif;font-size:22px;font-weight:normal;letter-spacing:1px">Termômetro do Focus</h1><span style="font-size:11px;letter-spacing:1px">RELATÓRIO SEMANAL · CLAUDE LAB PUC-RIO</span></td>
 </tr></table>
 <p style="margin:0;font-size:16px;color:{COR['marca']};font-weight:bold">Relatório Focus de {data}</p>
 <p style="margin:6px 0 0;font-size:14px;color:{COR['suave']}">Gerado em {_esc(resumo.get('gerado_em'))} · Banco Central do Brasil</p>

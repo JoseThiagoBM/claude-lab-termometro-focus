@@ -131,9 +131,10 @@ def test_tamanho_html_sem_imagem_abaixo_de_100kb(resumo, tmp_path):
 
 def test_opcionais_ausentes_na_tabela_e_ordem(resumo):
     resumo['indicadores'] = [{'indicador': 'IPCA', 'ano': 2027, 'mediana': 4.76}]
+    resumo['termometro'] = {'selic_hoje': 13.75}
     documento = montar(resumo, '<p>Texto original conferido.</p>')
     assert '4,76' in documento and '—' in documento
     assert 'Texto original conferido.' in documento
-    titulos = ['Alertas da semana', 'Análise da semana', 'Números da semana', 'O Focus acertou?']
+    titulos = ['O que já aconteceu × o que o mercado espera', 'Alertas da semana', 'Análise da semana', 'Números da semana', 'O Focus acertou?']
     assert [documento.index(t) for t in titulos] == sorted(documento.index(t) for t in titulos)
     assert '<html' in montar({}, '')

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Termômetro do Focus · vídeo</title>
+<style>
+:root { --bg: #f4f6f8; --fg: #17222c; --muted: #5b6b78; --accent: #0b5c7a; }
+@media (prefers-color-scheme: dark) { :root { --bg: #0f161c; --fg: #e3eaf0; --muted: #93a4b2; --accent: #5fb4d6; color-scheme: dark; } }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.5 "Segoe UI", Arial, sans-serif;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+main { max-width: 960px; margin: 0 auto; padding-block: 28px 40px; display: grid; gap: 14px; }
+h1 { margin: 0; font-size: clamp(24px, 4vw, 32px); }
+video { width: 100%; max-width: 100%; height: auto; background: #000; border-radius: 4px; }
+p { margin: 0; color: var(--muted); }
+a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Termômetro do Focus · vídeo de 1:54</h1>
+  <p>Claude Lab PUC-Rio · Case 1 · 06/11/2026 · Thomas Shu Chung, Thiago Signorini Leal, Theo Monteiro Dorr Abreu e José Thiago Bevilaqua Monteiro.</p>
+  <video controls preload="metadata" src="video.mp4"></video>
+  <p>Montado com prints reais da ferramenta e saídas reais do terminal; narração com a voz pt-BR do Windows.
+     <a href="./">Relatório da semana (artefato)</a> · <a href="https://github.com/JoseThiagoBM/claude-lab-termometro-focus">Código no GitHub</a> ·
+     <a href="video.mp4">baixar o MP4</a></p>
+  <p>Fonte: Banco Central do Brasil, Relatório Focus de 30/10/2026. Não constitui recomendação de investimento.</p>
+</main>
+</body>
+</html>

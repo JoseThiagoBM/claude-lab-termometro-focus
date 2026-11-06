@@ -2,7 +2,7 @@
 
 > Claude Lab · Economia & Finanças · PUC-Rio · 06/11/2026
 
-**Vídeo (até 2 minutos):** [preencher]
+**Vídeo (1:54):** https://josethiagobm.github.io/claude-lab-termometro-focus/video.html — gravação montada com prints reais da ferramenta e saídas reais do terminal (`entrega/video/montar_video.py`); narração com a voz pt-BR do Windows.
 
 **Artefato público:** https://josethiagobm.github.io/claude-lab-termometro-focus/ — a versão web do relatório da semana (Focus de 30/10/2026), gerada pelo agente (`web.py`) e publicada no GitHub Pages por `scripts/publicar_pages.py`. Também no claude.ai: [artefato](https://claude.ai/artifact/VMPDBGXPmhFpsbbG3pXbgB).
 

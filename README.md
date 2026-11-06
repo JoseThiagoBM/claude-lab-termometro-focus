@@ -8,12 +8,14 @@
 
 ## Equipe
 
-| Integrante | Nome completo | Curso / período | Papel |
-|---|---|---|---|
-| Thomas | [preencher] | [preencher] | A — termômetro e checagens |
-| Thiago | [preencher] | [preencher] | B — histórico de acerto |
-| Theo | [preencher] | [preencher] | C — análise do Claude |
-| José | [preencher] | [preencher] | D — relatório, e-mail, agendamento e integração |
+| Integrante | Nome completo | Curso / período | Papel | GitHub |
+|---|---|---|---|---|
+| Thomas | Thomas Shu Chung | Economia, 2º período | A — termômetro e checagens | [thomaschung44-ai](https://github.com/thomaschung44-ai) |
+| Thiago | Thiago Signorini Leal | Economia, formado | B — histórico de acerto | [thiagosigleal-stack](https://github.com/thiagosigleal-stack) |
+| Theo | Theo Monteiro Dorr Abreu | Economia, 2º período | C — análise do Claude | [abreutheo1-sys](https://github.com/abreutheo1-sys) |
+| José | José Thiago Bevilaqua Monteiro | Engenharia de Produção, 2º período | D — relatório, e-mail, agendamento e integração | [JoseThiagoBM](https://github.com/JoseThiagoBM) |
+
+Validação independente (Frente V): Codex, com código próprio que não importa nada do projeto.
 
 ## O problema
 
@@ -131,7 +133,7 @@ O comando completo baixa dados e envia o e-mail. Depois, abra o Agendador de Tar
 - A Frente V encontrou **três furos**: indicador trocado, inteiro inventado e sinal invertido. A atualização da Frente C passou a conferir inteiros e implementou reescrita automática. A repetição das sondas confirmou a correção do inteiro inventado; ainda faltam associação entre número e indicador e conferência do sinal.
 - A raridade compara a mudança com uma janela de **6 anos**. A calibração dos alertas usa dados desde **2021**. São critérios diferentes, não probabilidades de acerto.
 - A conclusão histórica usa **5 anos completos**, de **2021 a 2025**. Amostra curta e eventos excepcionais limitam a generalização.
-- O envio pelo Gmail foi testado em 06/11/2026: o e-mail de teste e uma execução completa do agente (download → envio) foram aceitos pelo Gmail. Ainda falta confirmar a chegada com o gráfico, registrar a tarefa semanal e abrir o link do artefato em aba anônima: **[CONFERIR]**.
+- O envio pelo Gmail foi testado em 06/11/2026: o e-mail chegou à caixa do destinatário com o gráfico embutido e o novo design (confirmado pelo Thomas às 14h12). O envio usa a conta de uma pessoa do time; numa gestora, o certo seria uma conta de serviço.
 
 ## Aviso
 

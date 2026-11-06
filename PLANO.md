@@ -19,6 +19,12 @@
 
 ## Divisão (cada um edita só os seus arquivos)
 
+Regras completas para os agentes em [AGENTS.md](AGENTS.md); cada frente tem a sua tarefa em [tarefas/](tarefas/). Para começar num computador novo, cole no agente:
+
+> Leia AGENTS.md e tarefas/X_….md deste repositório e execute a tarefa da Frente X, na branch indicada, abrindo PR para main ao fim de cada passo que funcionar.
+
+Além das frentes A–D abaixo: **V (Codex)** recalcula tudo de forma independente e revisa os PRs ([tarefas/V_validacao.md](tarefas/V_validacao.md)); **Integração (José)** faz merge na `main` e é dono do `agente_semanal.py` e do `CONTRATO.md`.
+
 | Pessoa | Frente | Arquivos | Pronto quando |
 |---|---|---|---|
 | **A** | Termômetro e checagens | `termometro.py` | limiares calibrados pelo histórico (ex.: 2 DP das variações de 4 semanas); 1 checagem nova (respondentes baixos ou semana repetida) testada estragando um dado; 2 números conferidos no [Relatório Focus](https://www.bcb.gov.br/publicacoes/focus) oficial |

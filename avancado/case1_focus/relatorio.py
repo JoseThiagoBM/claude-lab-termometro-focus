@@ -1,10 +1,12 @@
 """
 Etapa 6 do agente: MONTAR o relatório em HTML (é o corpo do e-mail e o artefato web).
 Dono: Pessoa C. Entrada: `resumo` (CONTRATO.md) + HTML da análise. Saída: HTML completo.
+Assinatura fixa: montar(resumo, analise, saida) — `saida` é a pasta onde estão os gráficos (ex.: acuracia.png).
 """
+from pathlib import Path
 
 
-def montar(resumo: dict, analise: str) -> str:
+def montar(resumo: dict, analise: str, saida: Path | None = None) -> str:
     linhas = "".join(
         f"<tr><td>{l['indicador']}</td><td>{l['ano']}</td><td>{l['mediana']:.2f}</td>"
         f"<td>{l['var_semana']:+.2f}</td><td>{l['var_4_semanas']:+.2f}</td></tr>"

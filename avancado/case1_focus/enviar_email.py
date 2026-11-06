@@ -31,7 +31,9 @@ def ler_env(caminho: Path = ENV) -> dict:
     return cfg
 
 
-def enviar(assunto: str, html: str) -> list[str]:
+def enviar(assunto: str, html: str, imagens: list[Path] | None = None) -> list[str]:
+    # TODO (Frente D): embutir as imagens (ex.: saida/acuracia.png) no e-mail com Content-ID.
+    #       A assinatura enviar(assunto, html, imagens=None) é fixa: o agente_semanal.py chama assim.
     cfg = ler_env()
     destinatarios = [d.strip() for d in cfg["DESTINATARIOS"].split(",") if d.strip()]
     msg = MIMEMultipart("alternative")

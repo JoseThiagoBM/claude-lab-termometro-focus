@@ -1,0 +1,158 @@
+{
+  "data_focus": "30/10/2026",
+  "gerado_em": "06/11/2026",
+  "indicadores": [
+    {
+      "indicador": "IPCA",
+      "ano": 2026,
+      "mediana": 5.22,
+      "var_semana": 0.03,
+      "var_4_semanas": 0.2,
+      "desvio_padrao": 0.14,
+      "distancia_da_meta": 2.22
+    },
+    {
+      "indicador": "IPCA",
+      "ano": 2027,
+      "mediana": 4.76,
+      "var_semana": 0.43,
+      "var_4_semanas": 0.46,
+      "desvio_padrao": 0.62,
+      "distancia_da_meta": 1.76
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2026,
+      "mediana": 13.5,
+      "var_semana": 0.25,
+      "var_4_semanas": 0.0,
+      "desvio_padrao": 0.23
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2027,
+      "mediana": 12.5,
+      "var_semana": 0.75,
+      "var_4_semanas": 0.5,
+      "desvio_padrao": 0.92
+    },
+    {
+      "indicador": "Câmbio",
+      "ano": 2026,
+      "mediana": 5.34,
+      "var_semana": 0.29,
+      "var_4_semanas": 0.14,
+      "desvio_padrao": 0.19
+    },
+    {
+      "indicador": "Câmbio",
+      "ano": 2027,
+      "mediana": 5.4,
+      "var_semana": 0.25,
+      "var_4_semanas": 0.12,
+      "desvio_padrao": 0.23
+    },
+    {
+      "indicador": "PIB Total",
+      "ano": 2026,
+      "mediana": 1.76,
+      "var_semana": -0.04,
+      "var_4_semanas": -0.09,
+      "desvio_padrao": 0.16
+    },
+    {
+      "indicador": "PIB Total",
+      "ano": 2027,
+      "mediana": 1.2,
+      "var_semana": -0.12,
+      "var_4_semanas": -0.2,
+      "desvio_padrao": 0.45
+    }
+  ],
+  "alertas": [
+    "IPCA 2027: variou +0.46 em 4 semanas",
+    "Selic 2027: variou +0.50 em 4 semanas"
+  ],
+  "acuracia": [
+    {
+      "indicador": "IPCA",
+      "ano": 2021,
+      "quando": "início do ano",
+      "esperado": 3.43,
+      "realizado": 10.06,
+      "erro_pp": 6.63
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2021,
+      "quando": "início do ano",
+      "esperado": 3.25,
+      "realizado": 9.25,
+      "erro_pp": 6.0
+    },
+    {
+      "indicador": "IPCA",
+      "ano": 2022,
+      "quando": "início do ano",
+      "esperado": 5.09,
+      "realizado": 5.78,
+      "erro_pp": 0.69
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2022,
+      "quando": "início do ano",
+      "esperado": 11.75,
+      "realizado": 13.75,
+      "erro_pp": 2.0
+    },
+    {
+      "indicador": "IPCA",
+      "ano": 2023,
+      "quando": "início do ano",
+      "esperado": 5.39,
+      "realizado": 4.62,
+      "erro_pp": -0.77
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2023,
+      "quando": "início do ano",
+      "esperado": 12.5,
+      "realizado": 11.75,
+      "erro_pp": -0.75
+    },
+    {
+      "indicador": "IPCA",
+      "ano": 2024,
+      "quando": "início do ano",
+      "esperado": 3.85,
+      "realizado": 4.83,
+      "erro_pp": 0.98
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2024,
+      "quando": "início do ano",
+      "esperado": 9.0,
+      "realizado": 12.25,
+      "erro_pp": 3.25
+    },
+    {
+      "indicador": "IPCA",
+      "ano": 2025,
+      "quando": "início do ano",
+      "esperado": 5.06,
+      "realizado": 4.26,
+      "erro_pp": -0.79
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2025,
+      "quando": "início do ano",
+      "esperado": 15.0,
+      "realizado": 15.0,
+      "erro_pp": 0.0
+    }
+  ]
+}

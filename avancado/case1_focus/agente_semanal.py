@@ -28,7 +28,7 @@ RAIZ = AQUI.parents[1]
 SAIDA = AQUI / "saida"
 sys.path.insert(0, str(AQUI))
 
-from analise import analisar, conferir  # noqa: E402
+from analise import analisar_conferido  # noqa: E402
 from historico import historico  # noqa: E402
 from relatorio import montar  # noqa: E402
 from termometro import calcular, checar  # noqa: E402
@@ -36,6 +36,17 @@ from termometro import calcular, checar  # noqa: E402
 
 def baixar() -> None:
     subprocess.run([sys.executable, str(RAIZ / "scripts" / "baixar_dados_bcb.py")], check=True)
+
+
+def parar(problemas: list[str], com_email: bool) -> None:
+    """Não manda o relatório: avisa o time e sai com código 1."""
+    aviso = "<p>O agente parou. Problemas encontrados:</p><ul>" + \
+            "".join(f"<li>{html.escape(p)}</li>" for p in problemas) + "</ul>"
+    print("   PAROU:", "; ".join(problemas))
+    if com_email:
+        from enviar_email import enviar
+        enviar("[ALERTA] Agente do Focus parou", aviso)
+    sys.exit(1)
 
 
 def main() -> None:
@@ -53,29 +64,23 @@ def main() -> None:
 
     print("3. Checando..."); problemas = checar(resumo)
     if problemas:
-        aviso = "<p>O agente parou. Problemas encontrados:</p><ul>" + \
-                "".join(f"<li>{html.escape(p)}</li>" for p in problemas) + "</ul>"
-        print("   PAROU:", "; ".join(problemas))
-        if not args.sem_email:
-            from enviar_email import enviar
-            enviar("[ALERTA] Agente do Focus parou", aviso)
-        sys.exit(1)
+        parar(problemas, not args.sem_email)
 
-    print("4. Pedindo a análise ao Claude..."); analise = analisar(resumo)
-    print("5. Conferindo números do texto...")
-    suspeitos = conferir(analise, resumo)
+    print("4-5. Pedindo a análise ao Claude e conferindo os números...")
+    analise, suspeitos = analisar_conferido(resumo)
     if suspeitos:
-        print("   ATENÇÃO: números no texto que não estão no JSON:", ", ".join(suspeitos))
+        parar([f"a análise citou números que não estão nos dados: {', '.join(suspeitos)}"], not args.sem_email)
 
     print("6. Montando o relatório...")
-    relatorio = montar(resumo, analise)
+    relatorio = montar(resumo, analise, SAIDA)
     destino = SAIDA / "relatorio_semana.html"
     destino.write_text(relatorio, encoding="utf-8")
     print("   salvo em", destino)
 
     if not args.sem_email:
         from enviar_email import enviar
-        para = enviar(f"Termômetro do Focus — {resumo['data_focus']}", relatorio)
+        imagens = [p for p in [SAIDA / "acuracia.png"] if p.exists()]
+        para = enviar(f"Termômetro do Focus — {resumo['data_focus']}", relatorio, imagens)
         print("7. E-mail enviado para", ", ".join(para))
 
 

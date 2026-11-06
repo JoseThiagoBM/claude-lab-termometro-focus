@@ -36,5 +36,15 @@ def conferir(texto: str, resumo: dict) -> list[str]:
             suspeitos.append(v)
     return suspeitos
 
-# TODO: quando conferir() acusar suspeitos, pedir ao Claude para reescrever (até 2 tentativas)
-#       e só seguir se passar. A função nova fica aqui e o agente_semanal.py só a chama.
+def analisar_conferido(resumo: dict, gerar=None, tentativas: int = 2) -> tuple[str, list[str]]:
+    """Gera a análise e confere. Devolve (html, suspeitos). Lista vazia = pode enviar.
+
+    Assinatura fixa: o agente_semanal.py chama assim e PARA se `suspeitos` não vier vazio.
+    `gerar` é injetável para os testes não chamarem o Claude (padrão: analisar).
+    """
+    gerar = gerar or analisar
+    texto = gerar(resumo)
+    suspeitos = conferir(texto, resumo)
+    # TODO (Frente C): se houver suspeitos, pedir ao Claude para reescrever, até `tentativas` vezes,
+    #       dizendo quais números não existem no JSON. Hoje é uma tentativa só.
+    return texto, suspeitos

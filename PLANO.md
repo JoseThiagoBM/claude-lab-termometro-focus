@@ -57,3 +57,5 @@ O `agente_semanal.py` só orquestra. Mudança nele: avise o grupo.
 | 12h25 | Thomas (A) | var. de 4 semanas do IPCA 2026 saía 0,20 (diferença das medianas sem arredondar); o PDF mostra 5,01 → 5,22 = 0,21 | corrigido: variações calculadas com as medianas arredondadas |
 | 12h25 | Thomas (A) | limiar calibrado com 2020 (pandemia) dava 1,21 p.p. em 4 semanas para o PIB do ano | calibração de 2021 em diante: 0,49 p.p.; demais limiares mudam pouco |
 | 12h25 | Thomas (A) | Selic 2027 saltou 11,75 → 12,50 em 30/10 (dado real) | dispara ALERTA (limiar semanal 0,33 p.p.), não a checagem de erro |
+| — | B (Thiago) | IPCA 2024 direto na API do SGS: série 13522 em 12/2024 = 4,83; composição das 12 variações da série 433 = 4,8313 | bate com o `realizado` 4,83 do histórico |
+| — | B (Thiago) | Selic meta em 31/12/2024 direto na API do SGS (série 432) = 12,25 | bate com o `realizado` 12,25 do histórico |

@@ -19,6 +19,9 @@ O que mudou em relação à versão inicial:
     série do SGS parada (janela por série) e IPCA anual composto x oficial.
   - Pedido da Frente C: sequencia_direcao/sequencia_semanas (há quantas semanas seguidas o indicador anda
     na mesma direção) e percentil_4s/raridade_4s (quão rara é a variação de 4 semanas nos últimos 6 anos).
+  - "Maior desde": var_semana_maior_desde / var_semana_inedita (desde quando não há variação semanal tão
+    grande no mesmo sentido). "Quanto confiar": erro_mesma_epoca (quanto o Focus errou IPCA e Selic, nos
+    últimos 5 anos fechados, na mesma data do ano e no mesmo horizonte).
 """
 from __future__ import annotations
 
@@ -27,7 +30,7 @@ from datetime import date, datetime, timedelta
 import numpy as np
 import pandas as pd
 
-from inicio_focus import META_INFLACAO, carregar_focus, carregar_sgs, ipca_realizado_ano
+from inicio_focus import META_INFLACAO, carregar_focus, carregar_sgs, ipca_realizado_ano, selic_fim_de_ano
 
 INDICADORES = ["IPCA", "Selic", "Câmbio", "PIB Total"]
 TOLERANCIA_META = 1.5             # meta contínua: 3% com intervalo de 1,5% a 4,5%
@@ -127,6 +130,57 @@ def raridade_4s(focus: pd.DataFrame, ind: str, horizonte: int, ate: pd.Timestamp
             "n_historico_4s": int(len(hist))}
 
 
+def maior_desde(focus: pd.DataFrame, ind: str, horizonte: int, ate: pd.Timestamp, semana_atual: pd.Timestamp,
+                var: float) -> dict:
+    """Última semana, antes da atual e no mesmo horizonte, com variação semanal pelo menos do mesmo tamanho e no
+    mesmo sentido. Se não houver nenhuma desde o início dos dados, a variação é inédita."""
+    vazio = {"var_semana_maior_desde": None, "var_semana_inedita": False, "semanas_desde_variacao_igual": None}
+    if not var:
+        return vazio
+    ultima = None
+    for ano_ref in sorted(focus["DataReferencia"].unique()):
+        d = _serie(focus, ind, int(ano_ref), ate).round(2).diff().round(2).dropna()
+        d = d[(d.index.year == ano_ref - horizonte) & (d.index < semana_atual)]
+        iguais = d[(np.sign(d) == np.sign(var)) & (d.abs() >= abs(var))]
+        if len(iguais):
+            ultima = iguais.index.max() if ultima is None else max(ultima, iguais.index.max())
+    if ultima is None:
+        return {**vazio, "var_semana_inedita": True}
+    return {**vazio, "var_semana_maior_desde": f"{ultima:%d/%m/%Y}",
+            "semanas_desde_variacao_igual": int((semana_atual - ultima).days // 7)}
+
+
+def erro_mesma_epoca(focus: pd.DataFrame, sgs: pd.DataFrame, ind: str, horizonte: int, corte: pd.Timestamp,
+                     n: int = 5) -> dict | None:
+    """Quanto o Focus errou nos últimos n anos fechados, olhando a expectativa na MESMA data do ano e no mesmo
+    horizonte da semana atual (ex.: em 30/10, a Selic do ano seguinte). Erro = realizado - esperado."""
+    realizado = {"IPCA": ipca_realizado_ano, "Selic": selic_fim_de_ano}.get(ind)
+    if realizado is None:
+        return None
+    linhas = []
+    for ano in range(corte.year - 1, corte.year - 12, -1):
+        r = realizado(sgs, ano)
+        if r is None:
+            continue
+        dia = min(corte.day, 28) if corte.month == 2 else corte.day
+        quando = pd.Timestamp(year=ano - horizonte, month=corte.month, day=dia)
+        f = focus[(focus["Indicador"] == ind) & (focus["DataReferencia"] == ano) & (focus["Data"] <= quando)]
+        if f.empty or f["Data"].max() < quando - pd.Timedelta(days=14):
+            break                                     # sem coleta perto dessa data: acabou o histórico
+        esp = round(float(f.sort_values("Data")["Mediana"].iloc[-1]), 2)
+        linhas.append({"ano": ano, "esperado": esp, "realizado": round(r, 2), "erro_pp": round(round(r, 2) - esp, 2)})
+        if len(linhas) == n:
+            break
+    if not linhas:
+        return None
+    erros = [x["erro_pp"] for x in linhas]
+    return {"anos": len(linhas), "erro_medio_pp": round(float(np.mean(erros)), 2),
+            "erro_absoluto_medio_pp": round(float(np.mean(np.abs(erros))), 2),
+            "anos_realizado_acima": int(sum(e > 0 for e in erros)),
+            "anos_realizado_abaixo": int(sum(e < 0 for e in erros)),
+            "por_ano": sorted(linhas, key=lambda x: x["ano"])}
+
+
 def _ultimo_sgs(sgs: pd.DataFrame, serie: str) -> tuple[float, pd.Timestamp] | None:
     s = sgs[sgs["serie"] == serie].dropna(subset=["valor"]).sort_values("data")
     return None if s.empty else (float(s["valor"].iloc[-1]), s["data"].iloc[-1])
@@ -141,6 +195,7 @@ def calcular(hoje: date | None = None) -> dict:
     ano = corte.year
     resumo = {"data_focus": f"{corte:%d/%m/%Y}", "gerado_em": f"{hoje:%d/%m/%Y}",
               "sexta_referencia": f"{sexta:%d/%m/%Y}",
+              "inicio_dos_dados": int(focus["Data"].min().year),
               "indicadores": [], "alertas": [], "sinais_de_incerteza": [],
               "regra_de_alerta": "variação maior que 2 desvios-padrão das variações históricas do mesmo "
                                  "indicador e horizonte, de 2021 em diante"}
@@ -169,7 +224,10 @@ def calcular(hoje: date | None = None) -> dict:
                      "data_ultima_coleta": f"{ultima:%d/%m/%Y}"}
             direcao, semanas = sequencia(s)
             linha.update(sequencia_direcao=direcao, sequencia_semanas=semanas,
-                         **raridade_4s(focus, ind, h, corte, s.index[-1], linha["var_4_semanas"]))
+                         **raridade_4s(focus, ind, h, corte, s.index[-1], linha["var_4_semanas"]),
+                         **maior_desde(focus, ind, h, corte, s.index[-1], linha["var_semana"]))
+            if ind in ("IPCA", "Selic"):
+                linha["erro_mesma_epoca"] = erro_mesma_epoca(focus, sgs, ind, h, corte)
             if ind == "IPCA":
                 linha["distancia_da_meta"] = round(med - META_INFLACAO, 2)
                 linha["distancia_do_teto"] = round(med - (META_INFLACAO + TOLERANCIA_META), 2)

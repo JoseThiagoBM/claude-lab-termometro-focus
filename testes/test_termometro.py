@@ -156,3 +156,27 @@ def test_raridade_4s_dados_reais():
     assert linha[("IPCA", 2027)]["raridade_4s"] == "rara"      # +0,46 em 4 semanas: também é alerta (3,1 desvios)
     assert linha[("Selic", 2026)]["percentil_4s"] == 0         # não mudou em 4 semanas
     assert all(0 <= l["percentil_4s"] <= 100 and l["n_historico_4s"] >= 200 for l in r["indicadores"])
+
+
+@pytest.mark.skipif(not DADOS_REAIS.exists(), reason="baixe os dados com scripts/baixar_dados_bcb.py")
+def test_maior_desde_e_erro_mesma_epoca_dados_reais():
+    r = termometro.calcular(date(2026, 11, 6))
+    linha = {(l["indicador"], l["ano"]): l for l in r["indicadores"]}
+    assert r["inicio_dos_dados"] == 2020
+    assert linha[("IPCA", 2027)]["var_semana_inedita"] is True               # +0,42: maior alta semanal desde 2020
+    assert linha[("Selic", 2027)]["var_semana_maior_desde"] == "20/12/2024"  # +0,75
+    assert linha[("IPCA", 2026)]["var_semana_maior_desde"] == "09/10/2026"   # movimento comum: data recente
+    e = linha[("Selic", 2027)]["erro_mesma_epoca"]
+    assert (e["anos"], e["anos_realizado_acima"], e["erro_medio_pp"]) == (5, 5, 3.45)
+    assert linha[("IPCA", 2026)]["erro_mesma_epoca"]["erro_absoluto_medio_pp"] == 0.33
+    assert "erro_mesma_epoca" not in linha[("Câmbio", 2026)]
+
+
+@pytest.mark.skipif(not DADOS_REAIS.exists(), reason="baixe os dados com scripts/baixar_dados_bcb.py")
+def test_conferir_aceita_frases_com_os_campos_novos():
+    from analise import conferir
+    r = termometro.calcular(date(2026, 11, 6))
+    texto = ("<p>A alta semanal do IPCA 2027 é a maior desde o início dos dados, em 2020. A Selic 2027 teve a "
+             "maior alta semanal desde 20/12/2024. Na mesma época do ano, nos últimos 5 anos, a Selic do ano "
+             "seguinte veio acima do esperado em 5 de 5 anos, em média 3,45 p.p.</p>")
+    assert conferir(texto, r) == []

@@ -34,6 +34,7 @@ from historico import extras_historico, historico  # noqa: E402
 from relatorio import montar  # noqa: E402
 from reserva import NOMES as NOMES_MOTOR, motores  # noqa: E402
 from termometro import calcular, checar  # noqa: E402
+from web import montar_web  # noqa: E402
 
 
 def baixar() -> None:
@@ -100,6 +101,9 @@ def main() -> None:
     destino = SAIDA / "relatorio_semana.html"
     destino.write_text(relatorio, encoding="utf-8")
     print("   salvo em", destino)
+    web = SAIDA / "relatorio_web.html"  # artefato público (web.py, Frente D)
+    web.write_text(montar_web(resumo, analise, SAIDA), encoding="utf-8")
+    print("   versão web em", web)
 
     if not args.sem_email:
         from enviar_email import enviar

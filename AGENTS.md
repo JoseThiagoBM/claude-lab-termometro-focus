@@ -15,7 +15,7 @@ Você **só edita os arquivos da sua frente**. Precisa mudar arquivo de outra fr
 | A — termômetro e checagens | `tarefas/A_termometro.md` | `frente-a` | `avancado/case1_focus/termometro.py`, `testes/test_termometro.py` |
 | B — histórico de acerto | `tarefas/B_historico.md` | `frente-b` | `avancado/case1_focus/historico.py`, `avancado/case1_focus/inicio_focus.py`, `testes/test_historico.py` |
 | C — análise do Claude | `tarefas/C_analise.md` | `frente-c` | `avancado/case1_focus/analise.py`, `avancado/case1_focus/prompt_analise.md`, `testes/test_analise.py` |
-| D — relatório, e-mail, agenda, entrega | `tarefas/D_entrega.md` | `frente-d` | `avancado/case1_focus/relatorio.py`, `avancado/case1_focus/enviar_email.py`, `agendar/`, `README.md`, `testes/test_relatorio.py` |
+| D — relatório, e-mail, agenda, entrega | `tarefas/D_entrega.md` | `frente-d` | `avancado/case1_focus/relatorio.py`, `avancado/case1_focus/web.py`, `testes/test_web.py`, `avancado/case1_focus/enviar_email.py`, `agendar/`, `README.md`, `testes/test_relatorio.py` |
 | V — validação independente (Codex) | `tarefas/V_validacao.md` | `validacao` | `validacao/` |
 | Integração (José) | — | `main` | `avancado/case1_focus/agente_semanal.py`, `CONTRATO.md`, `AGENTS.md`, `CLAUDE.md`, `requirements.txt`, `testes/conftest.py`, `testes/test_contrato.py`, `testes/fixtures/`, `scripts/`, `tarefas/`, `avancado/case1_focus/reserva.py`, `testes/test_reserva.py`, `MIGRAR_PARA_CODEX.md` |
 

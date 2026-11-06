@@ -1,0 +1,12 @@
+.....................................                                    [100%]
+============================== warnings summary ===============================
+testes/test_termometro.py: 192 warnings
+  C:\Users\joseb\Documents\Codex\Hackathon-PUC-Rio\claude-lab-termometro-focus\.venv\Lib\site-packages\pandas\core\resample.py:2359: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    + Timedelta(days=1, unit=edges_dti.unit).as_unit(edges_dti.unit)
+
+testes/test_termometro.py: 182 warnings
+  C:\Users\joseb\Documents\Codex\Hackathon-PUC-Rio\claude-lab-termometro-focus\avancado\case1_focus\termometro.py:81: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    & (d.index >= pd.Timestamp(f"{ano_ref - horizonte}-01-01") + pd.Timedelta(weeks=semanas))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+37 passed, 374 warnings in 2.33s

@@ -1,0 +1,128 @@
+indicador | ano | campo | resumo | recalculado | gabarito | bate?
+IPCA | 2026 | mediana | 5.22 | 5.22 | 5.22 | SIM
+IPCA | 2026 | mediana_semana_anterior | 5.19 | 5.19 | 5.19 | SIM
+IPCA | 2026 | mediana_4_semanas_atras | 5.01 | 5.01 | 5.01 | SIM
+IPCA | 2026 | var_semana | 0.03 | 0.03 | - | SIM
+IPCA | 2026 | var_4_semanas | 0.21 | 0.21 | - | SIM
+IPCA | 2026 | respondentes | 144 | 144 | 144 | SIM
+IPCA | 2026 | desvio_padrao | 0.14 | 0.14 | - | SIM
+IPCA | 2026 | desvio_padrao_semana_anterior | 0.15 | 0.15 | - | SIM
+IPCA | 2026 | desvio_padrao_4_semanas_atras | 0.22 | 0.22 | - | SIM
+IPCA | 2026 | limiar_semana | 0.26 | 0.26 | - | SIM
+IPCA | 2026 | limiar_4s | 0.82 | 0.82 | - | SIM
+IPCA | 2026 | desvios_4s | 0.5 | 0.5 | - | SIM
+IPCA | 2027 | mediana | 4.76 | 4.76 | 4.76 | SIM
+IPCA | 2027 | mediana_semana_anterior | 4.34 | 4.34 | 4.34 | SIM
+IPCA | 2027 | mediana_4_semanas_atras | 4.3 | 4.3 | 4.3 | SIM
+IPCA | 2027 | var_semana | 0.42 | 0.42 | - | SIM
+IPCA | 2027 | var_4_semanas | 0.46 | 0.46 | - | SIM
+IPCA | 2027 | respondentes | 144 | 144 | 144 | SIM
+IPCA | 2027 | desvio_padrao | 0.62 | 0.62 | - | SIM
+IPCA | 2027 | desvio_padrao_semana_anterior | 0.43 | 0.43 | - | SIM
+IPCA | 2027 | desvio_padrao_4_semanas_atras | 0.42 | 0.42 | - | SIM
+IPCA | 2027 | limiar_semana | 0.11 | 0.11 | - | SIM
+IPCA | 2027 | limiar_4s | 0.3 | 0.3 | - | SIM
+IPCA | 2027 | desvios_4s | 3.1 | 3.1 | - | SIM
+Selic | 2026 | mediana | 13.5 | 13.5 | 13.5 | SIM
+Selic | 2026 | mediana_semana_anterior | 13.25 | 13.25 | 13.25 | SIM
+Selic | 2026 | mediana_4_semanas_atras | 13.5 | 13.5 | 13.5 | SIM
+Selic | 2026 | var_semana | 0.25 | 0.25 | - | SIM
+Selic | 2026 | var_4_semanas | 0.0 | 0.0 | - | SIM
+Selic | 2026 | respondentes | 143 | 143 | 143 | SIM
+Selic | 2026 | desvio_padrao | 0.23 | 0.23 | - | SIM
+Selic | 2026 | desvio_padrao_semana_anterior | 0.18 | 0.18 | - | SIM
+Selic | 2026 | desvio_padrao_4_semanas_atras | 0.22 | 0.22 | - | SIM
+Selic | 2026 | limiar_semana | 0.27 | 0.27 | - | SIM
+Selic | 2026 | limiar_4s | 0.64 | 0.64 | - | SIM
+Selic | 2026 | desvios_4s | 0.0 | 0.0 | - | SIM
+Selic | 2027 | mediana | 12.5 | 12.5 | 12.5 | SIM
+Selic | 2027 | mediana_semana_anterior | 11.75 | 11.75 | 11.75 | SIM
+Selic | 2027 | mediana_4_semanas_atras | 12.0 | 12.0 | 12.0 | SIM
+Selic | 2027 | var_semana | 0.75 | 0.75 | - | SIM
+Selic | 2027 | var_4_semanas | 0.5 | 0.5 | - | SIM
+Selic | 2027 | respondentes | 143 | 143 | 143 | SIM
+Selic | 2027 | desvio_padrao | 0.92 | 0.92 | - | SIM
+Selic | 2027 | desvio_padrao_semana_anterior | 0.78 | 0.78 | - | SIM
+Selic | 2027 | desvio_padrao_4_semanas_atras | 0.73 | 0.73 | - | SIM
+Selic | 2027 | limiar_semana | 0.33 | 0.33 | - | SIM
+Selic | 2027 | limiar_4s | 0.89 | 0.89 | - | SIM
+Selic | 2027 | desvios_4s | 1.1 | 1.1 | - | SIM
+Câmbio | 2026 | mediana | 5.34 | 5.34 | 5.34 | SIM
+Câmbio | 2026 | mediana_semana_anterior | 5.05 | 5.05 | 5.05 | SIM
+Câmbio | 2026 | mediana_4_semanas_atras | 5.2 | 5.2 | 5.2 | SIM
+Câmbio | 2026 | var_semana | 0.29 | 0.29 | - | SIM
+Câmbio | 2026 | var_4_semanas | 0.14 | 0.14 | - | SIM
+Câmbio | 2026 | respondentes | 120 | 120 | 120 | SIM
+Câmbio | 2026 | desvio_padrao | 0.19 | 0.19 | - | SIM
+Câmbio | 2026 | desvio_padrao_semana_anterior | 0.16 | 0.16 | - | SIM
+Câmbio | 2026 | desvio_padrao_4_semanas_atras | 0.12 | 0.12 | - | SIM
+Câmbio | 2026 | limiar_semana | 0.08 | 0.08 | - | SIM
+Câmbio | 2026 | limiar_4s | 0.2 | 0.2 | - | SIM
+Câmbio | 2026 | desvios_4s | 1.4 | 1.4 | - | SIM
+Câmbio | 2027 | mediana | 5.4 | 5.4 | 5.4 | SIM
+Câmbio | 2027 | mediana_semana_anterior | 5.15 | 5.15 | 5.15 | SIM
+Câmbio | 2027 | mediana_4_semanas_atras | 5.28 | 5.28 | 5.28 | SIM
+Câmbio | 2027 | var_semana | 0.25 | 0.25 | - | SIM
+Câmbio | 2027 | var_4_semanas | 0.12 | 0.12 | - | SIM
+Câmbio | 2027 | respondentes | 119 | 119 | 119 | SIM
+Câmbio | 2027 | desvio_padrao | 0.23 | 0.23 | - | SIM
+Câmbio | 2027 | desvio_padrao_semana_anterior | 0.24 | 0.24 | - | SIM
+Câmbio | 2027 | desvio_padrao_4_semanas_atras | 0.19 | 0.19 | - | SIM
+Câmbio | 2027 | limiar_semana | 0.07 | 0.07 | - | SIM
+Câmbio | 2027 | limiar_4s | 0.17 | 0.17 | - | SIM
+Câmbio | 2027 | desvios_4s | 1.4 | 1.4 | - | SIM
+PIB Total | 2026 | mediana | 1.76 | 1.76 | 1.76 | SIM
+PIB Total | 2026 | mediana_semana_anterior | 1.8 | 1.8 | 1.8 | SIM
+PIB Total | 2026 | mediana_4_semanas_atras | 1.85 | 1.85 | 1.85 | SIM
+PIB Total | 2026 | var_semana | -0.04 | -0.04 | - | SIM
+PIB Total | 2026 | var_4_semanas | -0.09 | -0.09 | - | SIM
+PIB Total | 2026 | respondentes | 117 | 117 | 117 | SIM
+PIB Total | 2026 | desvio_padrao | 0.16 | 0.16 | - | SIM
+PIB Total | 2026 | desvio_padrao_semana_anterior | 0.15 | 0.15 | - | SIM
+PIB Total | 2026 | desvio_padrao_4_semanas_atras | 0.12 | 0.12 | - | SIM
+PIB Total | 2026 | limiar_semana | 0.15 | 0.15 | - | SIM
+PIB Total | 2026 | limiar_4s | 0.49 | 0.49 | - | SIM
+PIB Total | 2026 | desvios_4s | -0.4 | -0.4 | - | SIM
+PIB Total | 2027 | mediana | 1.2 | 1.2 | 1.2 | SIM
+PIB Total | 2027 | mediana_semana_anterior | 1.31 | 1.31 | 1.31 | SIM
+PIB Total | 2027 | mediana_4_semanas_atras | 1.4 | 1.4 | 1.4 | SIM
+PIB Total | 2027 | var_semana | -0.11 | -0.11 | - | SIM
+PIB Total | 2027 | var_4_semanas | -0.2 | -0.2 | - | SIM
+PIB Total | 2027 | respondentes | 116 | 116 | 116 | SIM
+PIB Total | 2027 | desvio_padrao | 0.45 | 0.45 | - | SIM
+PIB Total | 2027 | desvio_padrao_semana_anterior | 0.34 | 0.34 | - | SIM
+PIB Total | 2027 | desvio_padrao_4_semanas_atras | 0.36 | 0.36 | - | SIM
+PIB Total | 2027 | limiar_semana | 0.09 | 0.09 | - | SIM
+PIB Total | 2027 | limiar_4s | 0.25 | 0.25 | - | SIM
+PIB Total | 2027 | desvios_4s | -1.6 | -1.6 | - | SIM
+IPCA | 2021 | esperado | 3.43 | 3.43 | - | SIM
+IPCA | 2021 | realizado | 10.06 | 10.06 | - | SIM
+IPCA | 2021 | erro_pp | 6.63 | 6.63 | - | SIM
+Selic | 2021 | esperado | 3.25 | 3.25 | - | SIM
+Selic | 2021 | realizado | 9.25 | 9.25 | - | SIM
+Selic | 2021 | erro_pp | 6.0 | 6.0 | - | SIM
+IPCA | 2022 | esperado | 5.09 | 5.09 | - | SIM
+IPCA | 2022 | realizado | 5.78 | 5.78 | - | SIM
+IPCA | 2022 | erro_pp | 0.69 | 0.69 | - | SIM
+Selic | 2022 | esperado | 11.75 | 11.75 | - | SIM
+Selic | 2022 | realizado | 13.75 | 13.75 | - | SIM
+Selic | 2022 | erro_pp | 2.0 | 2.0 | - | SIM
+IPCA | 2023 | esperado | 5.39 | 5.39 | - | SIM
+IPCA | 2023 | realizado | 4.62 | 4.62 | - | SIM
+IPCA | 2023 | erro_pp | -0.77 | -0.77 | - | SIM
+Selic | 2023 | esperado | 12.5 | 12.5 | - | SIM
+Selic | 2023 | realizado | 11.75 | 11.75 | - | SIM
+Selic | 2023 | erro_pp | -0.75 | -0.75 | - | SIM
+IPCA | 2024 | esperado | 3.85 | 3.85 | - | SIM
+IPCA | 2024 | realizado | 4.83 | 4.83 | - | SIM
+IPCA | 2024 | erro_pp | 0.98 | 0.98 | - | SIM
+Selic | 2024 | esperado | 9.0 | 9.0 | - | SIM
+Selic | 2024 | realizado | 12.25 | 12.25 | - | SIM
+Selic | 2024 | erro_pp | 3.25 | 3.25 | - | SIM
+IPCA | 2025 | esperado | 5.06 | 5.06 | - | SIM
+IPCA | 2025 | realizado | 4.26 | 4.26 | - | SIM
+IPCA | 2025 | erro_pp | -0.79 | -0.79 | - | SIM
+Selic | 2025 | esperado | 15.0 | 15.0 | - | SIM
+Selic | 2025 | realizado | 15.0 | 15.0 | - | SIM
+Selic | 2025 | erro_pp | 0.0 | 0.0 | - | SIM
+TOTAL: 126 campos; 126 batem; 0 divergem; 32 tambem conferidos no PDF

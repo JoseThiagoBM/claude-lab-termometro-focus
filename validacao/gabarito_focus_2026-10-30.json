@@ -1,0 +1,73 @@
+{
+  "fonte": "https://www.bcb.gov.br/content/focus/focus/R20261030.pdf",
+  "fonte_acessada": true,
+  "data_focus": "30/10/2026",
+  "pagina": 1,
+  "metodo": "Texto do PDF oficial acessado pela ferramenta web em 06/11/2026; download local falhou por DNS. Mediana - Agregado; Resp. últimos 30 dias, não 5 dias úteis.",
+  "indicadores": [
+    {
+      "indicador": "IPCA",
+      "ano": 2026,
+      "mediana_4_semanas_atras": 5.01,
+      "mediana_semana_anterior": 5.19,
+      "mediana": 5.22,
+      "respondentes": 144
+    },
+    {
+      "indicador": "IPCA",
+      "ano": 2027,
+      "mediana_4_semanas_atras": 4.3,
+      "mediana_semana_anterior": 4.34,
+      "mediana": 4.76,
+      "respondentes": 144
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2026,
+      "mediana_4_semanas_atras": 13.5,
+      "mediana_semana_anterior": 13.25,
+      "mediana": 13.5,
+      "respondentes": 143
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2027,
+      "mediana_4_semanas_atras": 12.0,
+      "mediana_semana_anterior": 11.75,
+      "mediana": 12.5,
+      "respondentes": 143
+    },
+    {
+      "indicador": "Câmbio",
+      "ano": 2026,
+      "mediana_4_semanas_atras": 5.2,
+      "mediana_semana_anterior": 5.05,
+      "mediana": 5.34,
+      "respondentes": 120
+    },
+    {
+      "indicador": "Câmbio",
+      "ano": 2027,
+      "mediana_4_semanas_atras": 5.28,
+      "mediana_semana_anterior": 5.15,
+      "mediana": 5.4,
+      "respondentes": 119
+    },
+    {
+      "indicador": "PIB Total",
+      "ano": 2026,
+      "mediana_4_semanas_atras": 1.85,
+      "mediana_semana_anterior": 1.8,
+      "mediana": 1.76,
+      "respondentes": 117
+    },
+    {
+      "indicador": "PIB Total",
+      "ano": 2027,
+      "mediana_4_semanas_atras": 1.4,
+      "mediana_semana_anterior": 1.31,
+      "mediana": 1.2,
+      "respondentes": 116
+    }
+  ]
+}

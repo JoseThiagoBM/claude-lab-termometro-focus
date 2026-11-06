@@ -2,7 +2,7 @@
 import matplotlib.image as mpimg
 import pytest
 
-from historico import ANOS, HORIZONTES, LARGURA_PX, historico, resumo_acuracia
+from historico import ANOS, HORIZONTES, LARGURA_PX, extras_historico, historico, resumo_acuracia
 from inicio_focus import carregar_sgs, ipca_realizado_ano, selic_fim_de_ano
 
 
@@ -13,8 +13,23 @@ def sgs():
 
 @pytest.fixture(scope="module")
 def saida_hist(tmp_path_factory):
+    """(pasta, linhas dos 3 horizontes). A saída de historico() é testada à parte."""
     pasta = tmp_path_factory.mktemp("saida")
-    return pasta, historico(pasta)
+    historico(pasta)
+    return pasta, extras_historico()["acuracia_horizontes"]
+
+
+def test_acuracia_tem_uma_linha_por_indicador_e_ano(tmp_path):
+    """resumo["acuracia"] mantém o formato que relatorio.py (Frente D) já usa: só "início do ano"."""
+    linhas = historico(tmp_path)
+    assert {l["quando"] for l in linhas} == {"início do ano"}
+    assert len(linhas) == len({(l["indicador"], l["ano"]) for l in linhas}) == 2 * ANOS
+
+
+def test_extras_tem_os_campos_do_contrato():
+    extras = extras_historico()
+    assert set(extras) == {"acuracia_horizontes", "acuracia_resumo"}
+    assert set(extras["acuracia_resumo"]) == {"IPCA", "Selic"}
 
 
 @pytest.mark.parametrize("ano", [2021, 2022, 2023, 2024, 2025])

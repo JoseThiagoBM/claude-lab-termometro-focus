@@ -1,7 +1,7 @@
 """
 Etapa 2b do agente: HISTÓRICO DE ACERTO — o Focus acertou IPCA e Selic nos últimos 5 anos fechados?
 Dono: Pessoa B. Saída: lista em resumo["acuracia"] (formato em CONTRATO.md) + saida/acuracia.png.
-Resumo numérico para a análise: resumo_acuracia(linhas) -> resumo["acuracia_resumo"].
+Campos novos via extras_historico(): resumo["acuracia_horizontes"] (3 horizontes) e resumo["acuracia_resumo"].
 
 Compara a mediana do Focus em três momentos com o realizado (IPCA composto no ano; Selic meta no fim do ano):
   "12 meses antes" = 15/01 do ano anterior · "início do ano" = 15/01 · "meio do ano" = 15/07.
@@ -105,13 +105,26 @@ def _grafico(linhas: list[dict], res: dict, data_focus: str, destino: Path) -> N
     plt.close(fig)
 
 
-def historico(saida: Path) -> list[dict]:
+def _linhas_horizontes() -> tuple[list[dict], str]:
+    """Todas as linhas (3 horizontes × anos fechados) e a data do Focus mais recente."""
     focus = carregar_focus()
     acc = tabela_acuracia(focus, carregar_sgs())
     acc = acc[acc["quando"].isin(HORIZONTES) & acc["ano"].isin(_anos_fechados(acc))]
     linhas = [{k: (int(v) if k == "ano" else float(v) if k in ("esperado", "realizado", "erro_pp") else v)
                for k, v in r.items()} for r in acc.to_dict("records")]
+    return linhas, f"{focus['Data'].max():%d/%m/%Y}"
 
+
+def historico(saida: Path) -> list[dict]:
+    """resumo["acuracia"]: uma linha por indicador/ano, horizonte "início do ano" (formato que relatório e
+    análise já usam). Os 3 horizontes ficam em extras_historico() e no gráfico."""
+    linhas, data_focus = _linhas_horizontes()
     saida.mkdir(exist_ok=True)
-    _grafico(linhas, resumo_acuracia(linhas), f"{focus['Data'].max():%d/%m/%Y}", saida / "acuracia.png")
-    return linhas
+    _grafico(linhas, resumo_acuracia(linhas), data_focus, saida / "acuracia.png")
+    return [l for l in linhas if l["quando"] == HORIZONTE_PRINCIPAL]
+
+
+def extras_historico() -> dict:
+    """Campos novos do resumo (CONTRATO.md). No agente: resumo.update(extras_historico())."""
+    linhas, _ = _linhas_horizontes()
+    return {"acuracia_horizontes": linhas, "acuracia_resumo": resumo_acuracia(linhas)}

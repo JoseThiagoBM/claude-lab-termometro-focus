@@ -51,6 +51,14 @@ O `resumo` é **a única fonte dos números** do e-mail e do relatório. Quem ca
 - `integridade` (dict): insumos das checagens (`linhas_duplicadas`, `sgs_ultima_data`, `ipca_composto_x_oficial`).
   **Uso interno do `checar`**: a análise (C) não deve receber nem citar esses números.
 
+### Campos novos da Frente C (analise.py)
+
+- `contas_frente_c` (dict), calculado em Python por `contas_extras(resumo)`, nunca pela IA:
+  `n_alertas`; `juro_real_esperado` (lista com `ano`, `selic_fim_do_ano`, `ipca_do_ano`, `juro_real` em %);
+  `juro_real_formula`; `variacao_selic_entre_anos` (`de_ano`, `para_ano`, `selic_de`, `selic_para`, `variacao_pp`);
+  `vies_historico_ipca` (`erro_medio_pp`, `anos`, `horizonte`, `fonte`, `leitura`). Campo ausente no resumo → a conta não entra.
+  Juro real = (1 + Selic do fim do ano) / (1 + IPCA do mesmo ano) − 1. Em 30/10/2026: 7,87% (2026) e 7,39% (2027).
+
 Arquivos gerados em `avancado/case1_focus/saida/`: `resumo_semana.json`, `acuracia.png` (B), `relatorio_semana.html` (D).
 
 ## Regras de dado (cuidados do case)

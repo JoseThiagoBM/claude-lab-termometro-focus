@@ -4,7 +4,7 @@
 
 **Vídeo (até 2 minutos):** [preencher]
 
-**Artefato público:** [preencher]
+**Artefato público:** [Termômetro do Focus, edição de 30/10/2026](https://claude.ai/artifact/VMPDBGXPmhFpsbbG3pXbgB), a versão web do relatório, gerada pelo agente (`web.py`)
 
 ## Equipe
 
@@ -28,6 +28,8 @@ Um relatório por e-mail toda segunda, nesta ordem:
 - **Análise:** texto curto, com identificação do motor que o escreveu.
 - **Números da semana:** expectativas e mudanças de IPCA, Selic, Câmbio e PIB Total.
 - **“O Focus acertou?”:** gráfico de expectativa × realizado e histórico dos anos completos.
+
+A mesma edição sai também como **página web** (`saida/relatorio_web.html`, gerada por `web.py`), com tema claro e escuro e a tabela no formato do Relatório Focus oficial (há 4 semanas, há 1 semana, hoje, ▲/▼ com semanas seguidas). É o [artefato público](https://claude.ai/artifact/VMPDBGXPmhFpsbbG3pXbgB): toda semana, basta republicar esse arquivo no mesmo link.
 
 Se uma checagem encontra dado inválido ou desatualizado, o agente interrompe o relatório e tenta enviar um aviso ao time. O aviso depende do e-mail estar configurado e disponível.
 
@@ -109,7 +111,7 @@ $env:MOTOR_ANALISE = 'sem_ia'
 Start-Process avancado\case1_focus\saida\relatorio_semana.html
 ```
 
-O resultado inclui `resumo_semana.json`, `relatorio_semana.html` e `acuracia.png`, em `avancado/case1_focus/saida/`. Em outra data, as checagens podem rejeitar a cópia antiga; nesse caso, rode com download para produzir uma edição atual.
+O resultado inclui `resumo_semana.json`, `relatorio_semana.html` (e-mail), `relatorio_web.html` (artefato) e `acuracia.png`, em `avancado/case1_focus/saida/`. Em outra data, as checagens podem rejeitar a cópia antiga; nesse caso, rode com download para produzir uma edição atual.
 
 Para configurar e-mail e agendamento, **a pessoa responsável** executa os scripts abaixo no próprio computador. Ela fornece as credenciais fora da gravação e seleciona apenas destinatários que aceitaram receber. Não exponha credenciais em vídeo, logs ou Git.
 
@@ -129,7 +131,7 @@ O comando completo baixa dados e envia o e-mail. Depois, abra o Agendador de Tar
 - A Frente V encontrou **três furos**: indicador trocado, inteiro inventado e sinal invertido. A atualização da Frente C passou a conferir inteiros e implementou reescrita automática. A repetição das sondas confirmou a correção do inteiro inventado; ainda faltam associação entre número e indicador e conferência do sinal.
 - A raridade compara a mudança com uma janela de **6 anos**. A calibração dos alertas usa dados desde **2021**. São critérios diferentes, não probabilidades de acerto.
 - A conclusão histórica usa **5 anos completos**, de **2021 a 2025**. Amostra curta e eventos excepcionais limitam a generalização.
-- Envio real, tarefa instalada e link público acessível precisam de confirmação na máquina de apresentação: **[CONFERIR]**. Esta atualização da documentação foi executada sem envio.
+- O envio pelo Gmail foi testado em 06/11/2026: o e-mail de teste e uma execução completa do agente (download → envio) foram aceitos pelo Gmail. Ainda falta confirmar a chegada com o gráfico, registrar a tarefa semanal e abrir o link do artefato em aba anônima: **[CONFERIR]**.
 
 ## Aviso
 

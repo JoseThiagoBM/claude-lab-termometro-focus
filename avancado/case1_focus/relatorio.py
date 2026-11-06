@@ -14,6 +14,7 @@ from pathlib import Path
 
 COR = {"texto": "#1f2933", "suave": "#616e7c", "borda": "#d9e2ec", "fundo": "#f5f7fa",
        "marca": "#0b4f6c", "alerta": "#b44d12", "alerta_fundo": "#fff4e5", "ok": "#2f7d32"}
+MOTORES = {"claude": "Claude", "codex": "Codex", "sem_ia": "um texto automático, sem IA,"}
 NOMES = {"IPCA": "IPCA (%)", "Selic": "Selic, fim do ano (%)", "Câmbio": "Câmbio, fim do ano (R$/US$)",
          "PIB Total": "PIB (%)"}
 
@@ -155,6 +156,7 @@ def montar(resumo: dict, analise: str, saida: Path | None = None) -> str:
 {corpo}
 <tr><td style="padding:20px 24px;font-size:11px;color:{COR['suave']};border-top:1px solid {COR['borda']}">
 Fonte: Banco Central do Brasil, Relatório Focus de {data} (API Olinda) e séries do SGS (433, 13522, 432).
-Análise escrita pelo Claude e conferida automaticamente: todo número do texto existe nos dados calculados.
+Análise escrita por {MOTORES.get(resumo.get('motor_analise', 'claude'), resumo.get('motor_analise'))} e conferida
+automaticamente: todo número do texto existe nos dados calculados.
 Projeto acadêmico do Claude Lab PUC-Rio. Não constitui recomendação de investimento.
 </td></tr></table></td></tr></table></body></html>"""

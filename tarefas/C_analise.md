@@ -14,7 +14,7 @@ A análise que o gestor lê é curta, útil e **só usa números que estão no J
 
 ## Passos
 
-1. **Reescrita automática:** se `conferir()` acusar suspeitos, chame o Claude de novo, até `tentativas` vezes, mandando o texto anterior e a lista dos números que não existem no JSON. Devolva o primeiro texto que passar.
+1. **Reescrita automática:** se `conferir()` acusar suspeitos, chame **o mesmo `gerar` que recebeu** de novo, até `tentativas` vezes, como `gerar(resumo, instrucao_extra)`. Em `instrucao_extra`, mande o texto anterior e a lista dos números que não existem no JSON. Devolva o primeiro texto que passar. `analisar()` deve aceitar o mesmo parâmetro opcional `instrucao_extra=""`. **Não chame `claude -p` direto na reescrita:** o agente usa o Codex como reserva quando o Claude falha (`reserva.py`, `MIGRAR_PARA_CODEX.md`).
 2. **Melhorar o `prompt_analise.md`:** comece pelos alertas; explique cada alerta com o limiar que o disparou (campo da Frente A); traga uma frase do histórico de acerto (campo `acuracia_resumo` da Frente B, quando existir); diga a data do Focus; nada de recomendação de investimento.
 3. **Fortalecer `conferir()`:** hoje ele só pega números decimais. Pense em percentuais inteiros ("5%"), datas e anos (2026 não é suspeito) e números por extenso. Não deixe passar o que o JSON não tem.
 4. **Testes** em `testes/test_analise.py`, todos **sem chamar o Claude**:

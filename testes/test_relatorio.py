@@ -15,6 +15,15 @@ def test_relatorio_tem_data_fonte_e_aviso(resumo, tmp_path):
     assert "recomendação de investimento" in html
 
 
+def test_identidade_aprovada_no_cabecalho(resumo):
+    import re
+    documento = montar(resumo, '')
+    titulo = re.search(r'<h1[^>]*>(.*?)</h1>', documento).group(1)
+    assert titulo == 'Termômetro do Focus'
+    assert re.search(r'<td[^>]*aria-hidden="true"[^>]*>TF</td>', documento)
+    assert 'Compasso' not in documento and 'COMPASSO' not in documento
+
+
 def test_relatorio_sem_campos_opcionais(resumo, tmp_path):
     resumo.pop("acuracia", None)
     resumo.pop("termometro", None)

@@ -3,8 +3,9 @@ import base64
 import html
 from pathlib import Path
 
-COR = {'texto': '#243e4b', 'suave': '#526975', 'borda': '#dce5e9',
-       'fundo': '#eef3f5', 'marca': '#0b5c7a', 'alerta': '#b4510f', 'ok': '#1d6b4f'}
+COR = {'texto': '#263142', 'suave': '#657080', 'borda': '#e5e1d8',
+       'fundo': '#f4f3ef', 'marca': '#22334d', 'acento': '#a18142',
+       'alerta': '#b4510f', 'ok': '#1d6b4f'}
 MOTORES = {'claude': 'Claude', 'codex': 'Codex', 'sem_ia': 'um texto automático, sem IA'}
 NOMES = {'IPCA': 'IPCA (%)', 'Selic': 'Selic, fim do ano (%)',
          'Câmbio': 'Câmbio, fim do ano (R$/US$)', 'PIB Total': 'PIB Total (%)'}
@@ -29,10 +30,10 @@ def _imagem(caminho: Path, alt: str) -> str:
 
 
 def _secao(titulo, corpo, rotulo='') -> str:
-    return (f'<tr><td bgcolor="#ffffff" style="padding:24px 16px;background:#ffffff;color:{COR["texto"]};'
-            f'border-top:1px solid {COR["borda"]}">'
-            f'<p style="margin:0 0 6px;font-size:14px;letter-spacing:1px;color:{COR["marca"]};font-weight:bold">{_esc(rotulo)}</p>'
-            f'<h2 style="margin:0 0 16px;font-size:22px;line-height:1.25;color:{COR["texto"]}">{_esc(titulo)}</h2>{corpo}</td></tr>')
+    return (f'<tr><td bgcolor="#ffffff" style="padding:18px 16px;background:#ffffff;color:{COR["texto"]};'
+            f'border-top:1px solid {COR["acento"]}">'
+            f'<p style="margin:0 0 6px;font-size:14px;letter-spacing:1px;color:{COR["acento"]};font-weight:bold">{_esc(rotulo)}</p>'
+            f'<h2 style="margin:0 0 12px;font-size:21px;font-weight:normal;line-height:1.25;color:{COR["texto"]}">{_esc(titulo)}</h2>{corpo}</td></tr>')
 
 
 def _lista(itens, compacto=False) -> str:
@@ -61,10 +62,10 @@ def _alertas(resumo) -> str:
 
 def _cartao(rotulo, valor, detalhe, data) -> str:
     # Uma coluna em qualquer largura: não depende de media queries no Gmail.
-    return (f'<tr><td bgcolor="#ffffff" style="background:#ffffff;padding:16px;border:1px solid {COR["borda"]};'
-            f'border-top:3px solid {COR["marca"]};color:{COR["texto"]}">'
+    return (f'<tr><td bgcolor="#ffffff" style="background:#ffffff;padding:12px;border-bottom:1px solid {COR["borda"]};'
+            f'border-left:2px solid {COR["acento"]};color:{COR["texto"]}">'
             f'<p style="margin:0;font-size:14px;font-weight:bold;color:{COR["marca"]}">{rotulo}</p>'
-            f'<p style="margin:6px 0;font-size:30px;line-height:1.2;font-weight:bold;font-variant-numeric:tabular-nums">{valor}</p>'
+            f'<p style="margin:6px 0;font-size:28px;line-height:1.2;font-weight:normal;font-variant-numeric:tabular-nums">{valor}</p>'
             f'<p style="margin:0;font-size:14px;line-height:1.5">{detalhe}</p>'
             f'<p style="margin:8px 0 0;font-size:14px;color:{COR["suave"]}">Fonte: BCB · {data}</p>'
             '</td></tr><tr><td height="10" style="height:10px;background:#ffffff"></td></tr>')
@@ -102,19 +103,19 @@ def _comparacao(linha):
 
 def _tabela_semana(resumo):
     # Indicador/ano ocupa uma linha própria para manter as cinco colunas legíveis no celular.
-    style = f'padding:10px 2px;text-align:right;font-size:14px;border-bottom:1px solid {COR["borda"]};font-variant-numeric:tabular-nums;'
+    style = f'padding:8px 2px;text-align:right;font-size:14px;border-bottom:1px solid {COR["borda"]};font-variant-numeric:tabular-nums;'
     cab = ''.join(f'<th scope="col" width="20%" style="{style}color:{COR["suave"]};font-weight:normal">{t}</th>'
                   for t in ('Há 4 semanas', 'Há 1 semana', 'Hoje', 'Comp. semanal', 'Resp.'))
     linhas = []
     for l in resumo.get('indicadores') or []:
         ind = l.get('indicador')
         comp, cor = _comparacao(l)
-        linhas.append(f'<tr><th colspan="5" scope="rowgroup" style="padding:20px 2px 8px;text-align:left;font-size:16px;color:{COR["marca"]}">'
+        linhas.append(f'<tr><th colspan="5" scope="rowgroup" style="padding:16px 2px 6px;text-align:left;font-size:16px;color:{COR["marca"]}">'
                       f'{_esc(NOMES.get(ind, ind))} · {_esc(l.get("ano"))}</th></tr>')
         valores = (_num(l.get('mediana_4_semanas_atras')), _num(l.get('mediana_semana_anterior')),
                    _num(l.get('mediana')), comp, _esc(l.get('respondentes')))
         linhas.append('<tr>' + ''.join(
-            f'<td style="{style}color:{cor if i == 3 else COR["texto"]};font-weight:{"bold" if i in (2,3) else "normal"}">{v}</td>'
+            f'<td style="{style}background:{"#f3efe6" if i == 2 else "#ffffff"};color:{cor if i == 3 else COR["texto"]};font-weight:{"bold" if i in (2,3) else "normal"}">{v}</td>'
             for i,v in enumerate(valores)) + '</tr>')
     if not linhas:
         return '<p>Números da semana indisponíveis nesta execução.</p>'
@@ -130,7 +131,7 @@ def _historico(resumo, saida):
     if not acc:
         return '<p>Histórico indisponível nesta execução.</p>'
     img = _imagem(saida / 'acuracia.png', 'Esperado × realizado de IPCA e Selic') if saida else ''
-    style = f'padding:10px 2px;text-align:right;font-size:14px;border-bottom:1px solid {COR["borda"]};font-variant-numeric:tabular-nums'
+    style = f'padding:8px 2px;text-align:right;font-size:14px;border-bottom:1px solid {COR["borda"]};font-variant-numeric:tabular-nums'
     linhas = ''.join('<tr>' + ''.join(f'<td style="{style}">{v}</td>' for v in
         (_esc(a.get('indicador')), _esc(a.get('ano')), _num(a.get('esperado')), _num(a.get('realizado')), _num(a.get('erro_pp'),True))) + '</tr>' for a in acc)
     cab = ''.join(f'<th scope="col" width="{largura}%" style="{style};font-weight:normal;overflow-wrap:break-word;color:{COR["suave"]}">{v}</th>'
@@ -158,15 +159,15 @@ def montar(resumo: dict, analise: str, saida: Path | None = None) -> str:
 <div aria-hidden="true" style="display:none;max-height:0;max-width:0;overflow:hidden;opacity:0;mso-hide:all;font-size:1px;line-height:1px;color:#ffffff;background:#ffffff">Focus de {data} · {n_alertas} alerta(s) nesta semana.</div>
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" bgcolor="{COR['fundo']}" style="background:{COR['fundo']}"><tr><td align="center" style="padding:16px 4px">
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff" style="max-width:640px;background:#ffffff;border:1px solid {COR['borda']}">
-<tr><td bgcolor="#ffffff" style="padding:28px 16px;background:#ffffff;border-top:6px solid {COR['marca']};color:{COR['texto']}">
-<table role="presentation" cellspacing="0" cellpadding="0" style="margin:0 0 18px;background:#ffffff"><tr>
-<td width="40" height="40" align="center" bgcolor="{COR['marca']}" aria-hidden="true" style="width:40px;height:40px;background:{COR['marca']};color:#ffffff;font-family:Georgia,serif;font-size:24px;line-height:40px">TF</td>
-<td style="padding-left:10px;background:#ffffff;color:{COR['marca']}"><h1 style="margin:0;font-family:Georgia,serif;font-size:22px;font-weight:normal;letter-spacing:1px">Termômetro do Focus</h1><span style="font-size:11px;letter-spacing:1px">RELATÓRIO SEMANAL · CLAUDE LAB PUC-RIO</span></td>
+<tr><td bgcolor="#ffffff" style="padding:22px 16px;background:#ffffff;border-top:2px solid {COR['acento']};color:{COR['texto']}">
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 16px;background:#ffffff"><tr>
+<td style="padding-right:10px;background:#ffffff;color:{COR['marca']}"><h1 style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:24px;line-height:1.2;font-weight:normal">Termômetro do Focus</h1><span style="font-size:11px;letter-spacing:1px;color:{COR['suave']}">RELATÓRIO SEMANAL · CLAUDE LAB PUC-RIO</span></td>
+<td width="44" height="44" align="center" aria-hidden="true" style="width:44px;height:44px;border:1px solid {COR['acento']};border-bottom:3px solid {COR['acento']};background:#ffffff;color:{COR['marca']};font-family:Georgia,serif;font-size:24px;line-height:44px">TF</td>
 </tr></table>
 <p style="margin:0;font-size:16px;color:{COR['marca']};font-weight:bold">Relatório Focus de {data}</p>
 <p style="margin:6px 0 0;font-size:14px;color:{COR['suave']}">Gerado em {_esc(resumo.get('gerado_em'))} · Banco Central do Brasil</p>
 </td></tr>{corpo}
-<tr><td bgcolor="#ffffff" style="padding:24px 16px;background:#ffffff;border-top:3px solid {COR['marca']};font-size:14px;line-height:1.6;color:{COR['suave']}">
+<tr><td bgcolor="#ffffff" style="padding:18px 16px;background:#ffffff;border-top:1px solid {COR['acento']};font-size:14px;line-height:1.6;color:{COR['suave']}">
 <p style="margin:0 0 8px">Fonte: Banco Central do Brasil · Focus de {data} (Olinda) e SGS.</p>
 <p style="margin:0 0 8px">Metodologia: medianas do Focus; IPCA composto; Selic de fim de ano.</p>
 <p style="margin:0 0 8px">Análise escrita por {motor}. Conferência numérica automática; sujeita às limitações do método.</p>

@@ -4,7 +4,7 @@
 
 **Vídeo (até 2 minutos):** [preencher]
 
-**Artefato público:** [Termômetro do Focus, edição de 30/10/2026](https://claude.ai/artifact/VMPDBGXPmhFpsbbG3pXbgB), a versão web do relatório, gerada pelo agente (`web.py`)
+**Artefato público:** https://josethiagobm.github.io/claude-lab-termometro-focus/ — a versão web do relatório da semana (Focus de 30/10/2026), gerada pelo agente (`web.py`) e publicada no GitHub Pages por `scripts/publicar_pages.py`. Também no claude.ai: [artefato](https://claude.ai/artifact/VMPDBGXPmhFpsbbG3pXbgB).
 
 ## Equipe
 

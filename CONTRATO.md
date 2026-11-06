@@ -45,6 +45,12 @@ O `resumo` é **a única fonte dos números** do e-mail e do relatório. Quem ca
   (13 = "subiu pela 13ª semana seguida"); `percentil_4s` (0–100): % das variações de 4 semanas dos últimos 6 anos
   (mesmo indicador e horizonte, em módulo, sem a semana atual) menores que a atual; `raridade_4s`: "rara" (≥ 95),
   "incomum" (≥ 80) ou "normal"; `n_historico_4s`: quantas semanas entraram na comparação.
+- `indicadores[*]` ("maior desde" e "quanto confiar"): `var_semana_maior_desde` (dd/mm/aaaa ou null): última semana,
+  antes da atual e no mesmo horizonte, com variação semanal pelo menos do mesmo tamanho e no mesmo sentido;
+  `var_semana_inedita` (bool): nenhuma desde o início dos dados (`inicio_dos_dados`, ano, no topo do resumo);
+  `semanas_desde_variacao_igual` (int). Só IPCA e Selic: `erro_mesma_epoca` = {`anos`, `erro_medio_pp`,
+  `erro_absoluto_medio_pp`, `anos_realizado_acima`, `anos_realizado_abaixo`, `por_ano`}: quanto o Focus errou nos
+  últimos 5 anos fechados olhando a expectativa na mesma data do ano e no mesmo horizonte (erro = realizado − esperado).
 - `sinais_de_incerteza` (list[str]): séries cuja dispersão subiu 25% ou mais em 4 semanas. `regra_de_alerta` (str): a régua, em texto.
 - `termometro` (dict): `selic_hoje`, `selic_hoje_data`, `selic_esperada_fim_do_ano`, `selic_esperada_menos_hoje`, `ipca_12m`,
   `ipca_12m_mes`, `ipca_12m_menos_meta`, `dolar_ptax`, `dolar_ptax_data`, `meta_inflacao`, `teto_da_meta`.

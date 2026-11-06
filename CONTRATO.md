@@ -51,6 +51,9 @@ O `resumo` é **a única fonte dos números** do e-mail e do relatório. Quem ca
   `semanas_desde_variacao_igual` (int). Só IPCA e Selic: `erro_mesma_epoca` = {`anos`, `erro_medio_pp`,
   `erro_absoluto_medio_pp`, `anos_realizado_acima`, `anos_realizado_abaixo`, `por_ano`}: quanto o Focus errou nos
   últimos 5 anos fechados olhando a expectativa na mesma data do ano e no mesmo horizonte (erro = realizado − esperado).
+- `ancoragem_ipca` (list): IPCA esperado do ano corrente até 3 anos à frente. Cada item: `ano`, `horizonte_anos`,
+  `mediana`, `mediana_4_semanas_atras`, `var_4_semanas`, `distancia_da_meta`, `acima_do_teto` e `maior_desde`
+  (dd/mm/aaaa: desde quando não havia expectativa tão alta NO MESMO HORIZONTE) ou `maior_desde_o_inicio` (bool).
 - `sinais_de_incerteza` (list[str]): séries cuja dispersão subiu 25% ou mais em 4 semanas. `regra_de_alerta` (str): a régua, em texto.
 - `termometro` (dict): `selic_hoje`, `selic_hoje_data`, `selic_esperada_fim_do_ano`, `selic_esperada_menos_hoje`, `ipca_12m`,
   `ipca_12m_mes`, `ipca_12m_menos_meta`, `dolar_ptax`, `dolar_ptax_data`, `meta_inflacao`, `teto_da_meta`.

@@ -40,6 +40,11 @@ O `resumo` é **a única fonte dos números** do e-mail e do relatório. Quem ca
   do histórico, na unidade do indicador), `desvios_4s` (variação de 4 semanas em desvios-padrão), `desvio_padrao_semana_anterior`,
   `desvio_padrao_4_semanas_atras`, `respondentes`, `data_ultima_coleta`; no IPCA, `distancia_do_teto`.
   As variações saem das medianas já arredondadas, como no PDF oficial (5,01 → 5,22 = +0,21).
+- `indicadores[*]` (pedido da Frente C): `sequencia_direcao` ("alta" | "queda" | "estável") e `sequencia_semanas` (int):
+  direção da última variação semanal e há quantas semanas seguidas ela se repete, com medianas arredondadas
+  (13 = "subiu pela 13ª semana seguida"); `percentil_4s` (0–100): % das variações de 4 semanas dos últimos 6 anos
+  (mesmo indicador e horizonte, em módulo, sem a semana atual) menores que a atual; `raridade_4s`: "rara" (≥ 95),
+  "incomum" (≥ 80) ou "normal"; `n_historico_4s`: quantas semanas entraram na comparação.
 - `sinais_de_incerteza` (list[str]): séries cuja dispersão subiu 25% ou mais em 4 semanas. `regra_de_alerta` (str): a régua, em texto.
 - `termometro` (dict): `selic_hoje`, `selic_hoje_data`, `selic_esperada_fim_do_ano`, `selic_esperada_menos_hoje`, `ipca_12m`,
   `ipca_12m_mes`, `ipca_12m_menos_meta`, `dolar_ptax`, `dolar_ptax_data`, `meta_inflacao`, `teto_da_meta`.

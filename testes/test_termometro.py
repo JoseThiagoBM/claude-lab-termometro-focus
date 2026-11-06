@@ -126,3 +126,33 @@ def test_dados_reais_batem_com_o_focus_oficial(monkeypatch):
     # o salto real da Selic 2027 (11,75 -> 12,50) é ALERTA, não erro de dado
     assert any(a.startswith("Selic 2027") for a in r["alertas"])
     assert checar(r) == []
+
+
+def test_sequencia_conta_semanas_seguidas():
+    import pandas as pd
+
+    def s(v):
+        return pd.Series(v, index=pd.date_range("2026-01-02", periods=len(v), freq="W-FRI"))
+
+    assert termometro.sequencia(s([5.0, 5.1, 5.0, 5.1, 5.2, 5.3])) == ("alta", 3)
+    assert termometro.sequencia(s([5.3, 5.2, 5.1])) == ("queda", 2)
+    assert termometro.sequencia(s([5.0, 5.1, 5.1, 5.1])) == ("estável", 2)
+    assert termometro.sequencia(s([5.0, 5.001, 5.004])) == ("estável", 2)   # arredondado a 2 casas, não mudou
+
+
+@pytest.mark.skipif(not DADOS_REAIS.exists(), reason="baixe os dados com scripts/baixar_dados_bcb.py")
+def test_sequencia_bate_com_o_noticiario():
+    # Focus de 05/06/2026: IPCA 2026 subiu pela 13ª semana seguida (5,09 -> 5,11).
+    # Focus de 10/07/2026: caiu pela 2ª semana seguida (5,30 -> 5,16).
+    for hoje, esperado in ((date(2026, 6, 8), ("alta", 13)), (date(2026, 7, 13), ("queda", 2))):
+        l = next(x for x in termometro.calcular(hoje)["indicadores"] if (x["indicador"], x["ano"]) == ("IPCA", 2026))
+        assert (l["sequencia_direcao"], l["sequencia_semanas"]) == esperado, hoje
+
+
+@pytest.mark.skipif(not DADOS_REAIS.exists(), reason="baixe os dados com scripts/baixar_dados_bcb.py")
+def test_raridade_4s_dados_reais():
+    r = termometro.calcular(date(2026, 11, 6))
+    linha = {(l["indicador"], l["ano"]): l for l in r["indicadores"]}
+    assert linha[("IPCA", 2027)]["raridade_4s"] == "rara"      # +0,46 em 4 semanas: também é alerta (3,1 desvios)
+    assert linha[("Selic", 2026)]["percentil_4s"] == 0         # não mudou em 4 semanas
+    assert all(0 <= l["percentil_4s"] <= 100 and l["n_historico_4s"] >= 200 for l in r["indicadores"])

@@ -7,10 +7,10 @@ Responda em português do Brasil, SOMENTE com HTML simples: <h3>, <p>, <ul>, <li
 Estrutura obrigatória:
 1. Um <h3> de até 8 palavras, em uma linha de texto, com a principal mensagem factual da semana e a data exata de data_focus. Não use um título genérico nem invente causalidade.
 2. Uma única <ul> com 3 a 4 <li> breves sobre POR QUE IMPORTA. Prefira exatamente 3 itens, cada um com até 18 palavras:
-   - sintetize o que os alertas têm em comum, se houver um padrão sustentado pelo JSON; sem alertas, diga isso brevemente;
+   - sintetize o que os alertas têm em comum, se houver um padrão sustentado pelo JSON; sem alertas, diga isso brevemente; se algum indicador tiver `var_semana_inedita` = true, diga que a variação da semana é a maior desde o início dos dados (`inicio_dos_dados`); se `semanas_desde_variacao_igual` for 26 ou mais, diga que é a maior desde `var_semana_maior_desde`;
    - apresente o juro real esperado já calculado em contas_frente_c.juro_real_esperado. Identifique o ano. Se explicar a base, diga apenas que usa Selic de fim do ano e IPCA do mesmo ano; não refaça a conta;
-   - use acuracia_resumo ou contas_frente_c.vies_historico_ipca para contextualizar a confiança nas expectativas: erro positivo significa realizado acima do esperado, ou seja, subestimação pelo mercado. Identifique horizonte e período quando citar o histórico. Não transforme erro passado em previsão ou probabilidade futura;
-   - um quarto item é opcional, apenas se acrescentar um fato relevante sem repetição. Se algum campo estiver ausente, omita a afirmação correspondente e use outro fato disponível; nunca preencha lacunas com suposições.
+   - prefira `erro_mesma_epoca` (mesma data do ano e mesmo horizonte: cite `anos_realizado_acima` de `anos` e `erro_medio_pp`); na falta dele, use acuracia_resumo ou contas_frente_c.vies_historico_ipca para contextualizar a confiança nas expectativas: erro positivo significa realizado acima do esperado, ou seja, subestimação pelo mercado. Identifique horizonte e período quando citar o histórico. Não transforme erro passado em previsão ou probabilidade futura;
+   - um quarto item, se existir `ancoragem_ipca`: até que ano a mediana do IPCA fica acima da meta (`ano` e `distancia_da_meta`) e, para os horizontes de 2 e 3 anos, desde quando não se via expectativa tão alta (`maior_desde`). Se algum campo estiver ausente, omita a afirmação correspondente e use outro fato disponível; nunca preencha lacunas com suposições.
 3. Um <p> final de até 12 palavras, começando com <strong>No radar:</strong>, indicando o que comparar na próxima edição (por exemplo, continuidade das revisões ou dispersão). Não prever valores, direções, decisões ou eventos ausentes do JSON.
 
 Proibições explícitas:

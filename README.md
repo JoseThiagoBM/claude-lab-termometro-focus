@@ -4,7 +4,7 @@
 
 **Vídeo (até 2 minutos):** [preencher]
 
-**Artefato público:** [Termômetro do Focus, edição de 30/10/2026](https://claude.ai/artifact/VMPDBGXPmhFpsbbG3pXbgB), a versão web do relatório, gerada pelo agente (`web.py`)
+**Artefato público:** https://josethiagobm.github.io/claude-lab-termometro-focus/ — a versão web do relatório da semana (Focus de 30/10/2026), gerada pelo agente (`web.py`) e publicada no GitHub Pages por `scripts/publicar_pages.py`. Também no claude.ai: [artefato](https://claude.ai/artifact/VMPDBGXPmhFpsbbG3pXbgB).
 
 ## Equipe
 
@@ -31,7 +31,7 @@ Um relatório por e-mail toda segunda, nesta ordem:
 - **Números da semana:** expectativas e mudanças de IPCA, Selic, Câmbio e PIB Total.
 - **“O Focus acertou?”:** gráfico de expectativa × realizado e histórico dos anos completos.
 
-A mesma edição sai também como **página web** (`saida/relatorio_web.html`, gerada por `web.py`), com tema claro e escuro e a tabela no formato do Relatório Focus oficial (há 4 semanas, há 1 semana, hoje, ▲/▼ com semanas seguidas). É o [artefato público](https://claude.ai/artifact/VMPDBGXPmhFpsbbG3pXbgB): toda semana, basta republicar esse arquivo no mesmo link.
+A mesma edição sai também como **página web** (`saida/relatorio_web.html`, gerada por `web.py`), com tema claro e escuro e a tabela no formato do Relatório Focus oficial (há 4 semanas, há 1 semana, hoje, ▲/▼ com semanas seguidas). É o [artefato público](https://josethiagobm.github.io/claude-lab-termometro-focus/), no GitHub Pages: toda semana, `scripts/publicar_pages.py` copia esse arquivo para `docs/index.html`, e o commit na main atualiza a página.
 
 Se uma checagem encontra dado inválido ou desatualizado, o agente interrompe o relatório e tenta enviar um aviso ao time. O aviso depende do e-mail estar configurado e disponível.
 

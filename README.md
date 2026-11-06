@@ -57,7 +57,7 @@ A reserva tenta **Claude → Codex → sem IA**. A análise pede reescrita ao me
 
 ## Como verificamos
 
-Evidências: [registro de conferências do time](PLANO.md) e `validacao/RELATORIO.md` e `validacao/PREMISSAS.md`, na branch `validacao`. A integração desses arquivos à entrega é **[CONFERIR]**. A auditoria corresponde à versão nela identificada; não certifica automaticamente os campos acrescentados depois.
+Evidências: [registro de conferências do time](PLANO.md) e a [validação independente](validacao/), feita pelo Codex com código próprio que não importa nada do projeto: [relatório](validacao/RELATORIO.md), [premissas e sensibilidade](validacao/PREMISSAS.md), [script do recálculo](validacao/recalcular.py), [saída completa](validacao/saida_recalculo.txt) e [gabarito do PDF](validacao/gabarito_focus_2026-10-30.json). Para refazer: `.venv\Scripts\python.exe validacao\recalcular.py`. A auditoria vale para a versão de 06/11/2026 (Focus de 30/10) e não cobre os campos acrescentados depois dela (sequência, raridade, contas da Frente C).
 
 | O que conferimos | Onde | Resultado |
 |---|---|---|

@@ -1,0 +1,5 @@
+# Caminho avançado — pip install -r requirements.txt
+pandas>=2.2,<3   # o código foi escrito para pandas 2.x
+requests>=2.31
+matplotlib>=3.8
+anthropic>=0.40   # opcional: só para avancado/case2_copom/classificar_tom.py

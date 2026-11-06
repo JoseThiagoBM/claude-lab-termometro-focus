@@ -17,6 +17,19 @@ O `resumo` é **a única fonte dos números** do e-mail e do relatório. Quem ca
 }
 ```
 
+### Campos novos da Frente A (termometro.py)
+
+- `sexta_referencia` (str): a sexta-feira do último Focus publicado; o `checar` para se `data_focus` não for ela.
+- `indicadores[*]`: `mediana_semana_anterior`, `mediana_4_semanas_atras`, `limiar_4s` e `limiar_semana` (2 desvios-padrão
+  do histórico, na unidade do indicador), `desvios_4s` (variação de 4 semanas em desvios-padrão), `desvio_padrao_semana_anterior`,
+  `desvio_padrao_4_semanas_atras`, `respondentes`, `data_ultima_coleta`; no IPCA, `distancia_do_teto`.
+  As variações saem das medianas já arredondadas, como no PDF oficial (5,01 → 5,22 = +0,21).
+- `sinais_de_incerteza` (list[str]): séries cuja dispersão subiu 25% ou mais em 4 semanas. `regra_de_alerta` (str): a régua, em texto.
+- `termometro` (dict): `selic_hoje`, `selic_hoje_data`, `selic_esperada_fim_do_ano`, `selic_esperada_menos_hoje`, `ipca_12m`,
+  `ipca_12m_mes`, `ipca_12m_menos_meta`, `dolar_ptax`, `dolar_ptax_data`, `meta_inflacao`, `teto_da_meta`.
+- `integridade` (dict): insumos das checagens (`linhas_duplicadas`, `sgs_ultima_data`, `ipca_composto_x_oficial`).
+  **Uso interno do `checar`**: a análise (C) não deve receber nem citar esses números.
+
 Arquivos gerados em `avancado/case1_focus/saida/`: `resumo_semana.json`, `acuracia.png` (B), `relatorio_semana.html` (D).
 
 ## Regras de dado (cuidados do case)

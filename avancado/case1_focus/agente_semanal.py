@@ -30,7 +30,7 @@ CAMPOS_INTERNOS = {"integridade"}  # ficam no JSON, mas não vão para a anális
 sys.path.insert(0, str(AQUI))
 
 from analise import analisar_conferido  # noqa: E402
-from historico import historico  # noqa: E402
+from historico import extras_historico, historico  # noqa: E402
 from relatorio import montar  # noqa: E402
 from reserva import NOMES as NOMES_MOTOR, motores  # noqa: E402
 from termometro import calcular, checar  # noqa: E402
@@ -62,6 +62,7 @@ def main() -> None:
         print("1. Baixando dados..."); baixar()
     print("2. Calculando o termômetro..."); resumo = calcular()
     print("   + histórico de acerto..."); resumo["acuracia"] = historico(SAIDA)
+    resumo.update(extras_historico())  # acuracia_horizontes e acuracia_resumo (Frente B, CONTRATO.md)
     (SAIDA / "resumo_semana.json").write_text(json.dumps(resumo, ensure_ascii=False, indent=2), encoding="utf-8")
 
     print("3. Checando..."); problemas = checar(resumo)

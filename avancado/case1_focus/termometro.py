@@ -17,11 +17,14 @@ O que mudou em relação à versão inicial:
   - Checagens novas: Focus da sexta de referência disponível, linhas duplicadas, indicador faltando,
     série do Focus que parou, respondentes abaixo do mínimo, semana congelada (dado repetido),
     série do SGS parada (janela por série) e IPCA anual composto x oficial.
+  - Pedido da Frente C: sequencia_direcao/sequencia_semanas (há quantas semanas seguidas o indicador anda
+    na mesma direção) e percentil_4s/raridade_4s (quão rara é a variação de 4 semanas nos últimos 6 anos).
 """
 from __future__ import annotations
 
 from datetime import date, datetime, timedelta
 
+import numpy as np
 import pandas as pd
 
 from inicio_focus import META_INFLACAO, carregar_focus, carregar_sgs, ipca_realizado_ano
@@ -40,6 +43,8 @@ TOLERANCIA_IPCA_COMPOSTO = 0.05
 # depois do mês (a observação de setembro tem data 01/09 e só chega em outubro); o IBC-Br, ~75 dias.
 JANELA_SGS = {"selic_meta": 10, "dolar_ptax_venda": 10, "ipca_mensal": 80, "ipca_12m": 80, "ibc_br": 125}
 UNIDADE = {"IPCA": "p.p.", "Selic": "p.p.", "Câmbio": "R$", "PIB Total": "p.p."}
+ANOS_RARIDADE = 6                 # janela da comparação da variação de 4 semanas
+RARA, INCOMUM = 95, 80            # percentis: >= 95 rara, >= 80 incomum, abaixo disso normal
 
 
 # ---------------------------------------------------------------- auxiliares
@@ -84,6 +89,44 @@ def desvio_historico(focus: pd.DataFrame, ind: str, horizonte: int, ate: pd.Time
     return float(pd.concat(partes).std()) if partes else None
 
 
+def sequencia(s: pd.Series) -> tuple[str, int]:
+    """Direção da última variação semanal (medianas arredondadas, como no relatório oficial) e há quantas
+    semanas seguidas ela se repete. Ex.: ("alta", 13) = "subiu pela 13ª semana seguida"."""
+    d = s.round(2).diff().round(2).dropna()
+    if d.empty:
+        return "estável", 0
+    sinal = int(np.sign(d.iloc[-1]))
+    n = 0
+    for v in reversed(d.to_numpy()):
+        if int(np.sign(v)) != sinal:
+            break
+        n += 1
+    return {1: "alta", -1: "queda", 0: "estável"}[sinal], n
+
+
+def raridade_4s(focus: pd.DataFrame, ind: str, horizonte: int, ate: pd.Timestamp, semana_atual: pd.Timestamp,
+                var_4s: float) -> dict:
+    """Percentil da variação de 4 semanas (em módulo) entre todas as dos últimos ANOS_RARIDADE anos, do mesmo
+    indicador e horizonte, sem contar a semana atual. percentil 97 = 97% das variações foram menores."""
+    inicio = ate - pd.DateOffset(years=ANOS_RARIDADE)
+    partes = []
+    for ano_ref in sorted(focus["DataReferencia"].unique()):
+        s = _serie(focus, ind, int(ano_ref), ate).round(2)
+        if len(s) <= 4:
+            continue
+        d = s.diff(4).round(2).dropna()
+        d = d[(d.index.year == ano_ref - horizonte)
+              & (d.index >= pd.Timestamp(f"{ano_ref - horizonte}-01-01") + pd.Timedelta(weeks=4))
+              & (d.index > inicio) & (d.index < semana_atual)]
+        partes.append(d.abs())
+    hist = pd.concat(partes) if partes else pd.Series(dtype=float)
+    if hist.empty:
+        return {"percentil_4s": None, "raridade_4s": None, "n_historico_4s": 0}
+    p = round(100 * float((hist < abs(var_4s)).mean()))
+    return {"percentil_4s": p, "raridade_4s": "rara" if p >= RARA else "incomum" if p >= INCOMUM else "normal",
+            "n_historico_4s": int(len(hist))}
+
+
 def _ultimo_sgs(sgs: pd.DataFrame, serie: str) -> tuple[float, pd.Timestamp] | None:
     s = sgs[sgs["serie"] == serie].dropna(subset=["valor"]).sort_values("data")
     return None if s.empty else (float(s["valor"].iloc[-1]), s["data"].iloc[-1])
@@ -124,6 +167,9 @@ def calcular(hoje: date | None = None) -> dict:
                      "desvio_padrao_4_semanas_atras": round(dp_4s, 2) if dp_4s is not None else None,
                      "respondentes": int(_valor(focus, ind, a, corte, "numeroRespondentes") or 0),
                      "data_ultima_coleta": f"{ultima:%d/%m/%Y}"}
+            direcao, semanas = sequencia(s)
+            linha.update(sequencia_direcao=direcao, sequencia_semanas=semanas,
+                         **raridade_4s(focus, ind, h, corte, s.index[-1], linha["var_4_semanas"]))
             if ind == "IPCA":
                 linha["distancia_da_meta"] = round(med - META_INFLACAO, 2)
                 linha["distancia_do_teto"] = round(med - (META_INFLACAO + TOLERANCIA_META), 2)

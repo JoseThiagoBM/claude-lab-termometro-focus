@@ -1,0 +1,4 @@
+{"texto": "IPCA 2026 = 13.50", "correto": false, "aceito_regra_atual": true, "suspeitos": []}
+{"texto": "IPCA 2026 = 999%", "correto": false, "aceito_regra_atual": true, "suspeitos": []}
+{"texto": "PIB Total 2027 variou +0,11", "correto": false, "aceito_regra_atual": true, "suspeitos": []}
+{"texto": "IPCA 2026 = 5,22", "correto": true, "aceito_regra_atual": true, "suspeitos": []}

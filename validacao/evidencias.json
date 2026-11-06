@@ -1,0 +1,242 @@
+{
+  "conferidos": 126,
+  "bateram": 126,
+  "divergencias": [],
+  "comparacoes_pdf": 32,
+  "alertas": [
+    {
+      "indicador": "IPCA",
+      "ano": 2026,
+      "sigma_semana": 0.12915190606615087,
+      "sigma_4s": 0.41024535372961407,
+      "n_semana": 299,
+      "n_4s": 281,
+      "1.5": false,
+      "2": false,
+      "2.5": false
+    },
+    {
+      "indicador": "IPCA",
+      "ano": 2027,
+      "sigma_semana": 0.05434202797012305,
+      "sigma_4s": 0.15053032946457595,
+      "n_semana": 299,
+      "n_4s": 281,
+      "1.5": true,
+      "2": true,
+      "2.5": true
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2026,
+      "sigma_semana": 0.13275928371158371,
+      "sigma_4s": 0.3196874579068431,
+      "n_semana": 287,
+      "n_4s": 269,
+      "1.5": true,
+      "2": false,
+      "2.5": false
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2027,
+      "sigma_semana": 0.1665449421334039,
+      "sigma_4s": 0.4429040946488137,
+      "n_semana": 299,
+      "n_4s": 281,
+      "1.5": true,
+      "2": true,
+      "2.5": true
+    },
+    {
+      "indicador": "Câmbio",
+      "ano": 2026,
+      "sigma_semana": 0.039197549363983834,
+      "sigma_4s": 0.10091782551340897,
+      "n_semana": 299,
+      "n_4s": 281,
+      "1.5": true,
+      "2": true,
+      "2.5": true
+    },
+    {
+      "indicador": "Câmbio",
+      "ano": 2027,
+      "sigma_semana": 0.035965565039978505,
+      "sigma_4s": 0.08591287285184536,
+      "n_semana": 299,
+      "n_4s": 281,
+      "1.5": true,
+      "2": true,
+      "2.5": true
+    },
+    {
+      "indicador": "PIB Total",
+      "ano": 2026,
+      "sigma_semana": 0.07745007287725177,
+      "sigma_4s": 0.24626912189375735,
+      "n_semana": 299,
+      "n_4s": 281,
+      "1.5": false,
+      "2": false,
+      "2.5": false
+    },
+    {
+      "indicador": "PIB Total",
+      "ano": 2027,
+      "sigma_semana": 0.04374355259636536,
+      "sigma_4s": 0.12642300661439548,
+      "n_semana": 299,
+      "n_4s": 281,
+      "1.5": true,
+      "2": true,
+      "2.5": true
+    }
+  ],
+  "contagem_alertas": {
+    "1.5": 6,
+    "2": 5,
+    "2.5": 5
+  },
+  "historico": [
+    {
+      "indicador": "IPCA",
+      "ano": 2021,
+      "janeiro": 3.43,
+      "julho": 6.2449,
+      "realizado": 10.061054893257904,
+      "erro_janeiro": 6.631054893257904,
+      "erro_julho": 3.8161548932579032
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2021,
+      "janeiro": 3.25,
+      "julho": 6.75,
+      "realizado": 9.25,
+      "erro_janeiro": 6.0,
+      "erro_julho": 2.5
+    },
+    {
+      "indicador": "IPCA",
+      "ano": 2022,
+      "janeiro": 5.0932,
+      "julho": 7.5444,
+      "realizado": 5.784841959607756,
+      "erro_janeiro": 0.6916419596077557,
+      "erro_julho": -1.7595580403922444
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2022,
+      "janeiro": 11.75,
+      "julho": 13.75,
+      "realizado": 13.75,
+      "erro_janeiro": 2.0,
+      "erro_julho": 0.0
+    },
+    {
+      "indicador": "IPCA",
+      "ano": 2023,
+      "janeiro": 5.3919,
+      "julho": 4.9522,
+      "realizado": 4.621113930566789,
+      "erro_janeiro": -0.7707860694332105,
+      "erro_julho": -0.33108606943321117
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2023,
+      "janeiro": 12.5,
+      "julho": 12.0,
+      "realizado": 11.75,
+      "erro_janeiro": -0.75,
+      "erro_julho": -0.25
+    },
+    {
+      "indicador": "IPCA",
+      "ano": 2024,
+      "janeiro": 3.85,
+      "julho": 4.0218,
+      "realizado": 4.831295791859591,
+      "erro_janeiro": 0.981295791859591,
+      "erro_julho": 0.8094957918595913
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2024,
+      "janeiro": 9.0,
+      "julho": 10.5,
+      "realizado": 12.25,
+      "erro_janeiro": 3.25,
+      "erro_julho": 1.75
+    },
+    {
+      "indicador": "IPCA",
+      "ano": 2025,
+      "janeiro": 5.0551,
+      "julho": 5.17,
+      "realizado": 4.264384904568952,
+      "erro_janeiro": -0.7907150954310485,
+      "erro_julho": -0.905615095431048
+    },
+    {
+      "indicador": "Selic",
+      "ano": 2025,
+      "janeiro": 15.0,
+      "julho": 15.0,
+      "realizado": 15.0,
+      "erro_janeiro": 0.0,
+      "erro_julho": 0.0
+    }
+  ],
+  "metricas_historico": {
+    "IPCA": {
+      "janeiro": {
+        "erro_medio": 1.3484982959721983,
+        "erro_absoluto_medio": 1.973098761917902
+      },
+      "julho": {
+        "erro_medio": 0.3258782959721982,
+        "erro_absoluto_medio": 1.5243819780747996
+      }
+    },
+    "Selic": {
+      "janeiro": {
+        "erro_medio": 2.1,
+        "erro_absoluto_medio": 2.4
+      },
+      "julho": {
+        "erro_medio": 0.8,
+        "erro_absoluto_medio": 0.9
+      }
+    }
+  },
+  "sondas_texto": [
+    {
+      "texto": "IPCA 2026 = 13.50",
+      "correto": false,
+      "aceito_regra_atual": true
+    },
+    {
+      "texto": "IPCA 2026 = 999%",
+      "correto": false,
+      "aceito_regra_atual": true
+    },
+    {
+      "texto": "PIB Total 2027 variou +0,11",
+      "correto": false,
+      "aceito_regra_atual": true
+    },
+    {
+      "texto": "IPCA 2026 = 5,22",
+      "correto": true,
+      "aceito_regra_atual": true
+    }
+  ],
+  "sha256": {
+    "data\\case1_focus\\focus_anuais.csv": "ac6086ab6c23425ddacb07a106ba7e01fcbdb6337f6b2cad4e4c405b8557b8df",
+    "data\\case1_focus\\sgs_realizado.csv": "10f483e2ec18a91b7052b21b19f49b6e9a0047f6c2186ea9b6d29dff55119820",
+    "avancado\\case1_focus\\saida\\resumo_semana.json": "135061b4c8a5ba0ca3870cb6d2e3b92d9467f615ee347ad70c17c11eb8b10fd2"
+  }
+}

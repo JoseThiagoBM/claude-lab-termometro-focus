@@ -1,4 +1,4 @@
-<#
+﻿<#
 Agenda o agente do Focus para toda segunda-feira às 10h, no Agendador de Tarefas do Windows.
 Dono: Frente D. Quem roda este script é a PESSOA (não o agente), no próprio computador.
 

@@ -26,6 +26,7 @@ from pathlib import Path
 AQUI = Path(__file__).resolve().parent
 RAIZ = AQUI.parents[1]
 SAIDA = AQUI / "saida"
+CAMPOS_INTERNOS = {"integridade"}  # ficam no JSON, mas não vão para a análise do Claude
 sys.path.insert(0, str(AQUI))
 
 from analise import analisar_conferido  # noqa: E402
@@ -67,7 +68,10 @@ def main() -> None:
         parar(problemas, not args.sem_email)
 
     print("4-5. Pedindo a análise ao Claude e conferindo os números...")
-    analise, suspeitos = analisar_conferido(resumo)
+    # o bloco `integridade` é insumo interno do checar(): o Claude não o recebe, e o conferir()
+    # não aceita números dele (CONTRATO.md)
+    para_o_claude = {k: v for k, v in resumo.items() if k not in CAMPOS_INTERNOS}
+    analise, suspeitos = analisar_conferido(para_o_claude)
     if suspeitos:
         parar([f"a análise citou números que não estão nos dados: {', '.join(suspeitos)}"], not args.sem_email)
 

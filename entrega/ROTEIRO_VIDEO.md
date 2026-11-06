@@ -1,34 +1,49 @@
-# Roteiro do vídeo — Termômetro do Focus
+# Roteiro do vídeo: gravação de tela do Termômetro do Focus
 
-Até 2 minutos. Focus de 30/10/2026, edição gerada em 06/11/2026. Tempos definidos no plano de entrega. Números econômicos do resumo da semana; 126/126 e 32 do relatório da Frente V.
+**Formato:** gravação de tela narrada, mostrando a ferramenta funcionando de verdade, do comando ao e-mail.
+**Limite: 2:00.** A banca para de assistir em 2:00. Para caber, o vídeo usa cortes, acelera as esperas (2× a 4×) e põe legendas na tela no lugar de falas longas. Mire em **1:50** de vídeo final.
+
+Edição de referência: Focus de **30/10/2026**, relatório gerado em **06/11/2026**. Todo número falado vem do `resumo_semana.json` ou do `PLANO.md` / `validacao/`.
+
+## Antes de gravar (preparar as janelas)
+
+Deixe abertas, nesta ordem, e feche o resto (notificações desligadas: Win+N → Não perturbe):
+
+1. **Artefato** em aba anônima: `https://claude.ai/artifact/VMPDBGXPmhFpsbbG3pXbgB` (já compartilhado como público).
+2. **README** do GitHub, rolado até a tabela da equipe.
+3. **Terminal** (PowerShell) na pasta `time-case1`, fonte grande (Ctrl + roda do mouse), já com `.venv` pronta.
+4. **Gmail** do destinatário, caixa de entrada limpa, sem endereços pessoais à vista.
+5. **PDF oficial do Focus de 30/10/2026**: `https://www.bcb.gov.br/content/focus/focus/R20261030.pdf`.
+6. **`validacao/saida_recalculo.txt`** aberto no fim (linha `TOTAL: 126 campos; 126 batem`).
+
+**Gravação:** Win+Alt+R (Xbox Game Bar) grava a janela ativa; para trocar de janela durante a gravação, use OBS ou grave cena por cena e junte no **Clipchamp** (já vem no Windows 11), onde dá para cortar, acelerar e pôr legenda e zoom.
 
 ## Cenas
 
-| Tempo | Tela | Fala | Comando / ação |
+| Tempo | Tela (o que aparece) | Narração | Legenda / zoom na edição |
 |---|---|---|---|
-| 0:00–0:20 | Título, PDF do Focus e caixa de entrada preparada | “Toda segunda, alguém compara o Focus, explica o que mudou e confere os números. Nosso agente entrega o resumo por e-mail e mostra quanto o mercado acertou no passado. Se o dado estiver errado, ele para.” | Abrir o artefato e o PDF antes de gravar. |
-| 0:20–1:20 | Terminal; depois e-mail com data, alertas, cartões, análise e gráfico | “Um comando executa o fluxo. Aqui usamos a cópia do Focus de 30 de outubro. O IPCA de 2027 subiu 0,46 ponto em quatro semanas. Os cartões separam o observado do esperado. O gráfico compara previsão e resultado. O rodapé identifica o motor da análise.” | Rodar o comando principal abaixo. Mostrar a chegada real, rolar pelas seções e ampliar o gráfico. Encurtar a espera na edição com indicação de corte. |
-| 1:20–1:40 | Sabotagem identificada; PAROU no terminal; e-mail de alerta | “Agora alteramos o IPCA de propósito, apenas na memória. A checagem bloqueia o relatório e envia um aviso. Uma revisão de mercado gera alerta; um dado inválido interrompe o fluxo.” | Rodar o bloco de sabotagem ensaiado. Mostrar o assunto do aviso e o motivo. |
-| 1:40–2:00 | Como verificamos, PDF e equipe | “A validação refez os cálculos direto dos arquivos: 126 de 126 campos bateram, e 32 também no PDF oficial. Isso ajuda analistas e gestores a acompanhar mudanças. A conferência do texto ainda precisa melhorar. Não é recomendação de investimento.” | Mostrar README, evidência da branch validacao e PDF. Encerrar com fonte e aviso. |
+| **0:00–0:10** | Artefato: cabeçalho e faixa de alertas | "Toda segunda, analistas copiam o Relatório Focus do Banco Central, comparam com a semana anterior e escrevem um resumo à mão. Nós automatizamos isso." | Título: **Termômetro do Focus** · Claude Lab PUC-Rio |
+| **0:10–0:20** | README: tabela da equipe | "Somos Thomas, Thiago, Theo e José. Cada um construiu uma parte do agente, com o Claude." | Nomes + frente: A termômetro e checagens · B histórico · C análise · D relatório e e-mail |
+| **0:20–0:45** | Terminal: o comando e as etapas aparecendo (acelerar a espera) | "Um comando roda tudo: baixa o Focus e as séries do BC, calcula o que mudou, checa o dado, pede a análise ao Claude, confere cada número do texto e manda o e-mail." | Legenda acompanha cada linha: *baixar → calcular → checar → analisar → conferir → enviar* · "acelerado 4×" |
+| **0:45–1:10** | Gmail: o e-mail chegando e sendo rolado | "Em um minuto, chega isto: os alertas da semana com o limiar de cada um, o que já aconteceu contra o que o mercado espera, a análise e a tabela no formato do Focus." | Zoom no alerta **IPCA 2027: +0,46 p.p. em 4 semanas, rara** e no cartão **Selic hoje 13,75% × 13,50% esperada** |
+| **1:10–1:22** | Gmail: o gráfico "O Focus acertou?" | "E responde à pergunta da diretora: o Focus acertou? De 2021 a 2025, o mercado subestimou a inflação, e o erro cai ao longo do ano." | Zoom no gráfico · legenda **erro do IPCA: 1,97 p.p. em janeiro → 1,53 em julho** |
+| **1:22–1:36** | Terminal: bloco de sabotagem → `PAROU` | "Se o dado vier errado, ele não manda o relatório. Aqui forçamos um IPCA de 52% e o agente para e avisa o time." | Zoom em **PAROU: IPCA 2026 = 52.2 fora da faixa plausível** |
+| **1:36–1:48** | PDF do BC lado a lado com `saida_recalculo.txt` | "Conferimos tudo: um código independente recalculou 126 números direto dos dados do BC, e 32 deles batemos com o PDF oficial. Zero divergências." | **126/126 · 32 no PDF oficial · 0 divergências** |
+| **1:48–1:58** | Artefato (página pública), rolando até o rodapé | "Serve para gestoras, economistas e analistas que precisam do Focus toda segunda, sem copiar número à mão. Roda sozinho, agendado, e o código está aberto no GitHub." | **Quem usa:** gestores · economistas · analistas · **Agendado: segunda, 10h** · link do GitHub |
 
-## Comando principal
+**Utilidades para dizer (escolha 2, se sobrar tempo):** economiza a manhã de segunda; não manda número errado (para e avisa); mostra quanto confiar no Focus (histórico de acerto); a análise só cita números conferidos; tem reserva se a IA falhar (Codex ou texto sem IA).
 
-Configurar destinatários autorizados e testar o e-mail antes de gravar. Não abrir credenciais nem executar sua configuração na gravação. Deixar a caixa de entrada pronta.
+## Comandos
 
-A demonstração usa dados locais para manter a mesma edição. Dizer isso na fala. O modo agendado completo baixa dados automaticamente. O primeiro comando abaixo é preparação fora da tomada; o segundo é o comando mostrado.
+**Cena 0:20 (comando principal):** usa os dados já baixados para manter a edição de 30/10 e envia o e-mail de verdade. Diga "dados de 30 de outubro" na fala.
 
 ```powershell
-Remove-Item Env:MOTOR_ANALISE -ErrorAction SilentlyContinue
 .venv\Scripts\python.exe avancado\case1_focus\agente_semanal.py --sem-download
 ```
 
-A ordem padrão é Claude → Codex → sem IA. Confirmar a chegada na caixa de entrada antes de afirmar que houve entrega. Para ensaio sem envio, acrescentar `--sem-email`.
+Para o ensaio, sem enviar e-mail, acrescente `--sem-email`.
 
-## Sabotagem controlada
-
-O valor simulado **52,2** vem do registro em `PLANO.md`. Este bloco altera o resumo só em memória. Não grava nos CSVs nem edita o código. Usa as funções reais de checagem e parada: demonstra essa barreira, não um novo download completo.
-
-**O bloco envia o aviso aos destinatários configurados.** Rodar somente no ensaio combinado com o time e na gravação autorizada. Não foi executado durante a redação deste roteiro.
+**Cena 1:22 (sabotagem):** altera o IPCA só na memória; não mexe nos arquivos. Testado em 06/11 às 13h50: o agente para com `IPCA 2026 = 52.2 fora da faixa plausível` e sai com código 1. Com `com_email=True`, ele também manda o e-mail de alerta; para o ensaio, use `com_email=False`.
 
 ```powershell
 @'
@@ -45,28 +60,20 @@ parar(problemas, com_email=True)
 '@ | .venv\Scripts\python.exe -
 ```
 
-O código de saída de erro é esperado: o fluxo parou. Para ensaio sem envio, trocar `com_email=True` por `com_email=False` e mostrar apenas o bloqueio. Não apresentar esse ensaio como e-mail enviado. Uma nova execução normal recarrega os dados intactos.
-
 ## Plano B
 
-- Guardar uma gravação real pronta: execução, chegada do e-mail com gráfico e parada com aviso. Identificar como gravação anterior e manter a data do Focus visível.
-- Guardar prints do e-mail, dos cartões, do gráfico, de PAROU e da tabela de verificação. Identificá-los como registros do ensaio; não simular chegada ao vivo.
-- Se a IA estiver lenta, preparar `$env:MOTOR_ANALISE = 'sem_ia'` antes do comando. Mostrar o rodapé correspondente e não atribuir esse texto à IA.
-- Se a rede ou o e-mail falhar, abrir o HTML com `Start-Process avancado\case1_focus\saida\relatorio_semana.html`. Mostrar o envio pela gravação anterior, se ela existir.
+- **Grave cena por cena** e junte no Clipchamp: se uma cena falhar, refaça só ela.
+- **Se o Claude demorar:** acelere a espera na edição, ou rode antes `$env:MOTOR_ANALISE = 'codex'` (ou `'sem_ia'`). O rodapé mostra o motor; não diga que foi o Claude se não foi.
+- **Se o e-mail não chegar:** mostre o `saida\relatorio_semana.html` aberto no navegador e diga "esta é a versão que vai por e-mail".
+- **Guarde uma gravação completa** e prints (e-mail, alertas, gráfico, PAROU) antes da versão final.
 
-## Checklist antes de gravar
+## Checklist
 
-- [ ] Preencher equipe, vídeo e artefato no README; abrir o artefato em aba anônima.
-- [ ] Confirmar Focus de 30/10/2026 no resumo e no e-mail desta edição.
-- [ ] Rodar `.venv\Scripts\python.exe -m pytest -q testes` e o agente com `--sem-download --sem-email`.
-- [ ] Não apresentar 126/126 como cobertura dos campos posteriores à auditoria.
-- [ ] Ter relatório da Frente V e PDF abertos; conferir gráfico legível no e-mail.
-- [ ] Confirmar destinatários autorizados e ensaiar envio normal e aviso de parada.
-- [ ] Ensaiar a sabotagem em memória e conferir o motivo da parada.
-- [ ] Ocultar notificações, endereços pessoais e credenciais; não abrir a configuração na gravação.
-- [ ] Cronometrar a fala e preparar gravação de reserva e prints.
-- [ ] Mostrar as limitações da conferência textual; não afirmar que o texto é infalível.
+- [ ] Artefato aberto em aba anônima (prova que está público).
+- [ ] Ensaio com `--sem-email` e com a sabotagem `com_email=False`, cronometrado: total ≤ 1:55.
+- [ ] Notificações desligadas; nada de senha, `.env` ou endereço pessoal na tela.
+- [ ] Fonte grande no terminal; zoom nos números da tabela de cenas.
+- [ ] Vídeo final ≤ 2:00, no YouTube "não listado" ou Drive "qualquer pessoa com o link"; link testado em aba anônima.
+- [ ] Link do vídeo no README e no formulário.
 
-Fonte: Banco Central do Brasil
-
-Não constitui recomendação de investimento
+Fonte: Banco Central do Brasil, Relatório Focus de 30/10/2026. Projeto acadêmico. Não constitui recomendação de investimento.

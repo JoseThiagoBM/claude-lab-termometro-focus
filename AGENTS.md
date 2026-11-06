@@ -17,7 +17,11 @@ Você **só edita os arquivos da sua frente**. Precisa mudar arquivo de outra fr
 | C — análise do Claude | `tarefas/C_analise.md` | `frente-c` | `avancado/case1_focus/analise.py`, `avancado/case1_focus/prompt_analise.md`, `testes/test_analise.py` |
 | D — relatório, e-mail, agenda, entrega | `tarefas/D_entrega.md` | `frente-d` | `avancado/case1_focus/relatorio.py`, `avancado/case1_focus/enviar_email.py`, `agendar/`, `README.md`, `testes/test_relatorio.py` |
 | V — validação independente (Codex) | `tarefas/V_validacao.md` | `validacao` | `validacao/` |
-| Integração (José) | — | `main` | `avancado/case1_focus/agente_semanal.py`, `CONTRATO.md`, `AGENTS.md`, `CLAUDE.md`, `requirements.txt`, `testes/conftest.py`, `testes/test_contrato.py`, `testes/fixtures/`, `scripts/`, `tarefas/` |
+| Integração (José) | — | `main` | `avancado/case1_focus/agente_semanal.py`, `CONTRATO.md`, `AGENTS.md`, `CLAUDE.md`, `requirements.txt`, `testes/conftest.py`, `testes/test_contrato.py`, `testes/fixtures/`, `scripts/`, `tarefas/`, `avancado/case1_focus/reserva.py`, `testes/test_reserva.py`, `MIGRAR_PARA_CODEX.md` |
+
+**Limite do Claude acabou?** Siga `MIGRAR_PARA_CODEX.md`: o agente semanal já cai sozinho para o Codex (`reserva.py`, variável `MOTOR_ANALISE`), e cada pessoa troca o Claude Code pelo Codex na mesma pasta com o prompt de retomada.
+
+**Forma de todo motor de análise:** `gerar(resumo, instrucao_extra="") -> html`. A reescrita da Frente C deve chamar o **mesmo `gerar` que recebeu**, passando a correção em `instrucao_extra`. Nunca chame `claude -p` direto, senão a reserva Codex / sem IA deixa de funcionar.
 
 `referencia/` (se existir) é **só leitura**: código de referência gerado no chat do claude.ai. Porte de lá a parte da sua frente; não edite a pasta.
 

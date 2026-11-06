@@ -26,11 +26,13 @@ from pathlib import Path
 AQUI = Path(__file__).resolve().parent
 RAIZ = AQUI.parents[1]
 SAIDA = AQUI / "saida"
+CAMPOS_INTERNOS = {"integridade"}  # ficam no JSON, mas não vão para a análise do Claude
 sys.path.insert(0, str(AQUI))
 
 from analise import analisar_conferido  # noqa: E402
 from historico import historico  # noqa: E402
 from relatorio import montar  # noqa: E402
+from reserva import NOMES as NOMES_MOTOR, motores  # noqa: E402
 from termometro import calcular, checar  # noqa: E402
 
 
@@ -66,10 +68,30 @@ def main() -> None:
     if problemas:
         parar(problemas, not args.sem_email)
 
-    print("4-5. Pedindo a análise ao Claude e conferindo os números...")
-    analise, suspeitos = analisar_conferido(resumo)
-    if suspeitos:
-        parar([f"a análise citou números que não estão nos dados: {', '.join(suspeitos)}"], not args.sem_email)
+    print("4-5. Pedindo a análise e conferindo os números...")
+    # o bloco `integridade` é insumo interno do checar(): a IA não o recebe, e o conferir()
+    # não aceita números dele (CONTRATO.md)
+    para_o_claude = {k: v for k, v in resumo.items() if k not in CAMPOS_INTERNOS}
+    analise, falhas = None, []
+    for nome, gerar in motores():  # MOTOR_ANALISE; padrão: claude → codex → sem_ia (reserva.py)
+        print(f"   motor: {NOMES_MOTOR[nome]}")
+        try:
+            texto, suspeitos = analisar_conferido(para_o_claude, gerar=gerar)
+        except (SystemExit, Exception) as erro:  # limite do plano, sem login, timeout...
+            falhas.append(f"{nome}: {str(erro).strip()[:200]}")
+            print("   falhou:", falhas[-1])
+            continue
+        if suspeitos:
+            falhas.append(f"{nome}: citou números que não estão nos dados ({', '.join(suspeitos)})")
+            print("   reprovado na conferência:", falhas[-1])
+            continue
+        analise, resumo["motor_analise"] = texto, nome
+        break
+    if analise is None:
+        parar(["nenhum motor de análise passou na conferência"] + falhas, not args.sem_email)
+    if falhas:
+        resumo["motor_analise_falhas"] = falhas
+    (SAIDA / "resumo_semana.json").write_text(json.dumps(resumo, ensure_ascii=False, indent=2), encoding="utf-8")
 
     print("6. Montando o relatório...")
     relatorio = montar(resumo, analise, SAIDA)

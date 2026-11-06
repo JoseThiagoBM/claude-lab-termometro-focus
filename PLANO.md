@@ -53,3 +53,5 @@ O `agente_semanal.py` só orquestra. Mudança nele: avise o grupo.
 | 11h20 | — | Download do Focus quebrado (HTTP 400) | corrigida a codificação da URL |
 | 11h50 | — | IPCA composto × `ipca_12m` de dezembro, 2021–2025 | bate; 2022 difere 0,01 p.p. (arredondamento) |
 | 11h50 | — | Focus de 02/10 simulado e IPCA = 52,2 | agente parou nos dois casos |
+| — | B (Thiago) | IPCA 2024 direto na API do SGS: série 13522 em 12/2024 = 4,83; composição das 12 variações da série 433 = 4,8313 | bate com o `realizado` 4,83 do histórico |
+| — | B (Thiago) | Selic meta em 31/12/2024 direto na API do SGS (série 432) = 12,25 | bate com o `realizado` 12,25 do histórico |

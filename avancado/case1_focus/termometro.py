@@ -22,6 +22,8 @@ O que mudou em relação à versão inicial:
   - "Maior desde": var_semana_maior_desde / var_semana_inedita (desde quando não há variação semanal tão
     grande no mesmo sentido). "Quanto confiar": erro_mesma_epoca (quanto o Focus errou IPCA e Selic, nos
     últimos 5 anos fechados, na mesma data do ano e no mesmo horizonte).
+  - Ancoragem: resumo["ancoragem_ipca"] = IPCA esperado do ano corrente até 3 anos à frente, distância da meta e
+    desde quando não se via expectativa tão alta NO MESMO HORIZONTE (ex.: 2 anos à frente).
 """
 from __future__ import annotations
 
@@ -181,6 +183,29 @@ def erro_mesma_epoca(focus: pd.DataFrame, sgs: pd.DataFrame, ind: str, horizonte
             "por_ano": sorted(linhas, key=lambda x: x["ano"])}
 
 
+def ancoragem_ipca(focus: pd.DataFrame, corte: pd.Timestamp, anos_a_frente: int = 3) -> list[dict]:
+    """A curva de expectativas de IPCA (ano corrente até 3 anos à frente) contra a meta. Para cada horizonte, a
+    comparação histórica é no mesmo horizonte (ex.: '2 anos à frente' ao longo do tempo), não no mesmo ano."""
+    curva = []
+    for k in range(anos_a_frente + 1):
+        partes = []
+        for ano_ref in sorted(focus["DataReferencia"].unique()):
+            s = _serie(focus, "IPCA", int(ano_ref), corte).round(2)
+            partes.append(s[s.index.year == ano_ref - k])
+        h = pd.concat(partes).sort_index() if partes else pd.Series(dtype=float)
+        if len(h) < 5 or h.index[-1].year != corte.year:
+            continue
+        hoje, ant = float(h.iloc[-1]), h[h.index < h.index[-1]]
+        iguais = ant[ant >= hoje]
+        curva.append({"ano": corte.year + k, "horizonte_anos": k, "mediana": hoje,
+                      "mediana_4_semanas_atras": float(h.iloc[-5]), "var_4_semanas": round(hoje - float(h.iloc[-5]), 2),
+                      "distancia_da_meta": round(hoje - META_INFLACAO, 2),
+                      "acima_do_teto": hoje > META_INFLACAO + TOLERANCIA_META,
+                      "maior_desde": f"{iguais.index.max():%d/%m/%Y}" if len(iguais) else None,
+                      "maior_desde_o_inicio": not len(iguais)})
+    return curva
+
+
 def _ultimo_sgs(sgs: pd.DataFrame, serie: str) -> tuple[float, pd.Timestamp] | None:
     s = sgs[sgs["serie"] == serie].dropna(subset=["valor"]).sort_values("data")
     return None if s.empty else (float(s["valor"].iloc[-1]), s["data"].iloc[-1])
@@ -262,6 +287,7 @@ def calcular(hoje: date | None = None) -> dict:
     if ptax:
         t.update(dolar_ptax=round(ptax[0], 2), dolar_ptax_data=f"{ptax[1]:%d/%m/%Y}")
     resumo["termometro"] = t
+    resumo["ancoragem_ipca"] = ancoragem_ipca(focus, corte)
 
     # insumos das checagens de integridade (o checar() só recebe o resumo)
     integ = {"linhas_duplicadas": int(focus.duplicated(["Indicador", "Data", "DataReferencia"]).sum()),

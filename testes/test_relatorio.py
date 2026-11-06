@@ -31,6 +31,21 @@ def test_alertas_aparecem(resumo, tmp_path):
     assert "IPCA 2027: variou +0.46" in montar(resumo, "", tmp_path)
 
 
+def test_termometro_e_incerteza_aparecem(resumo, tmp_path):
+    resumo["termometro"] = {"selic_hoje": 13.75, "selic_esperada_fim_do_ano": 13.5, "selic_esperada_menos_hoje": -0.25,
+                            "ipca_12m": 4.58, "ipca_12m_mes": "09/2026", "ipca_12m_menos_meta": 1.58,
+                            "meta_inflacao": 3.0, "teto_da_meta": 4.5, "dolar_ptax": 5.46, "dolar_ptax_data": "05/11/2026"}
+    resumo["sinais_de_incerteza"] = ["IPCA 2027: dispersão de 0,42 para 0,62 em 4 semanas"]
+    html = montar(resumo, "", tmp_path)
+    assert "13,75%" in html and "4,58%" in html and "R$ 5,46" in html
+    assert "dispersão de 0,42 para 0,62" in html
+
+
+def test_agente_nao_manda_integridade_ao_claude():
+    import agente_semanal
+    assert "integridade" in agente_semanal.CAMPOS_INTERNOS
+
+
 def test_grafico_entra_em_base64(resumo, tmp_path):
     (tmp_path / "acuracia.png").write_bytes(PNG)
     assert 'src="data:image/png;base64,' in montar(resumo, "", tmp_path)

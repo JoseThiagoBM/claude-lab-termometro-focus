@@ -180,3 +180,17 @@ def test_conferir_aceita_frases_com_os_campos_novos():
              "maior alta semanal desde 20/12/2024. Na mesma época do ano, nos últimos 5 anos, a Selic do ano "
              "seguinte veio acima do esperado em 5 de 5 anos, em média 3,45 p.p.</p>")
     assert conferir(texto, r) == []
+
+
+@pytest.mark.skipif(not DADOS_REAIS.exists(), reason="baixe os dados com scripts/baixar_dados_bcb.py")
+def test_ancoragem_ipca_dados_reais():
+    r = termometro.calcular(date(2026, 11, 6))
+    curva = {c["ano"]: c for c in r["ancoragem_ipca"]}
+    assert sorted(curva) == [2026, 2027, 2028, 2029]
+    assert (curva[2028]["mediana"], curva[2028]["distancia_da_meta"], curva[2028]["maior_desde"]) == (4.0, 1.0, "15/08/2025")
+    assert curva[2029]["maior_desde"] == "02/06/2023"       # 3 anos à frente: maior desde jun/2023
+    assert curva[2027]["maior_desde"] == "27/12/2024" and curva[2026]["acima_do_teto"]
+    from analise import conferir
+    texto = ("<p>A mediana do IPCA fica acima da meta até 2029: 4,00% em 2028, a maior para 2 anos à frente "
+             "desde 15/08/2025, e 3,98% em 2029, a maior desde 02/06/2023.</p>")
+    assert conferir(texto, r) == []

@@ -53,3 +53,7 @@ O `agente_semanal.py` só orquestra. Mudança nele: avise o grupo.
 | 11h20 | — | Download do Focus quebrado (HTTP 400) | corrigida a codificação da URL |
 | 11h50 | — | IPCA composto × `ipca_12m` de dezembro, 2021–2025 | bate; 2022 difere 0,01 p.p. (arredondamento) |
 | 11h50 | — | Focus de 02/10 simulado e IPCA = 52,2 | agente parou nos dois casos |
+| 12h25 | Thomas (A) | 32 números do resumo (há 4 semanas, há 1 semana, hoje e respondentes das 8 séries) × PDF oficial do Focus de 30/10/2026 (bcb.gov.br/content/focus/focus/R20261030.pdf) | bate 32/32; virou teste automático (`test_dados_reais_batem_com_o_focus_oficial`) |
+| 12h25 | Thomas (A) | var. de 4 semanas do IPCA 2026 saía 0,20 (diferença das medianas sem arredondar); o PDF mostra 5,01 → 5,22 = 0,21 | corrigido: variações calculadas com as medianas arredondadas |
+| 12h25 | Thomas (A) | limiar calibrado com 2020 (pandemia) dava 1,21 p.p. em 4 semanas para o PIB do ano | calibração de 2021 em diante: 0,49 p.p.; demais limiares mudam pouco |
+| 12h25 | Thomas (A) | Selic 2027 saltou 11,75 → 12,50 em 30/10 (dado real) | dispara ALERTA (limiar semanal 0,33 p.p.), não a checagem de erro |

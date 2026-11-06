@@ -35,8 +35,9 @@ def _secao(titulo, corpo, rotulo='') -> str:
             f'<h2 style="margin:0 0 16px;font-size:22px;line-height:1.25;color:{COR["texto"]}">{_esc(titulo)}</h2>{corpo}</td></tr>')
 
 
-def _lista(itens) -> str:
-    return ''.join(f'<li style="margin:0 0 10px">{_esc(i)}</li>' for i in itens)
+def _lista(itens, compacto=False) -> str:
+    margem = 3 if compacto else 10
+    return ''.join(f'<li style="margin:0 0 {margem}px">{_esc(i)}</li>' for i in itens)
 
 
 def _alertas(resumo) -> str:
@@ -51,10 +52,10 @@ def _alertas(resumo) -> str:
         bloco = f'<p style="margin:0;color:{COR["ok"]}">Nenhum alerta sinalizado nesta edição.</p>'
     incerteza = resumo.get('sinais_de_incerteza') or []
     if incerteza:
-        bloco += (f'<p style="margin:20px 0 8px;font-weight:bold;color:{COR["suave"]}">Sinais de incerteza</p>'
-                  f'<ul style="margin:0;padding-left:20px;font-size:14px;line-height:1.5">{_lista(incerteza)}</ul>')
+        bloco += (f'<p style="margin:10px 0 4px;font-size:12px;font-weight:bold;color:{COR["suave"]}">Sinais de incerteza</p>'
+                  f'<ul style="margin:0;padding-left:20px;font-size:12px;line-height:1.35">{_lista(incerteza, compacto=True)}</ul>')
     if resumo.get('regra_de_alerta'):
-        bloco += f'<p style="font-size:14px;color:{COR["suave"]};margin:16px 0 0">Regra: {_esc(resumo.get("regra_de_alerta"))}.</p>'
+        bloco += f'<p style="font-size:12px;line-height:1.35;color:{COR["suave"]};margin:8px 0 0">Regra: {_esc(resumo.get("regra_de_alerta"))}.</p>'
     return bloco
 
 
@@ -144,22 +145,24 @@ def montar(resumo: dict, analise: str, saida: Path | None = None) -> str:
     data = _esc(resumo.get('data_focus'))
     n_alertas = len(resumo.get('alertas') or [])
     corpo = ''.join([
-        _secao('Alertas da semana', _alertas(resumo), 'O QUE MUDOU'),
         _termometro(resumo),
+        _secao('Alertas da semana', _alertas(resumo), 'O QUE MUDOU'),
         _secao('Análise da semana', f'<div style="font-size:16px;line-height:1.6;color:{COR["texto"]};background:#ffffff">{analise}</div>', 'LEITURA DA SEMANA'),
         _secao('Números da semana', _tabela_semana(resumo), 'EM NÚMEROS'),
         _secao('O Focus acertou?', _historico(resumo, saida), 'EXPECTATIVA × REALIZADO')])
     motor = _esc(MOTORES.get(resumo.get('motor_analise'), resumo.get('motor_analise') or 'motor não informado'))
     return f'''<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Termômetro do Focus — {data}</title></head>
+<title>Compasso — Termômetro do Focus — {data}</title></head>
 <body style="margin:0;padding:0;background:{COR['fundo']};font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;color:{COR['texto']}">
 <div aria-hidden="true" style="display:none;max-height:0;max-width:0;overflow:hidden;opacity:0;mso-hide:all;font-size:1px;line-height:1px;color:#ffffff;background:#ffffff">Focus de {data} · {n_alertas} alerta(s) nesta semana.</div>
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" bgcolor="{COR['fundo']}" style="background:{COR['fundo']}"><tr><td align="center" style="padding:16px 4px">
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff" style="max-width:640px;background:#ffffff;border:1px solid {COR['borda']}">
 <tr><td bgcolor="#ffffff" style="padding:28px 16px;background:#ffffff;border-top:6px solid {COR['marca']};color:{COR['texto']}">
-<p style="margin:0 0 18px;font-size:14px;font-weight:bold;letter-spacing:2px;color:{COR['marca']}">TERMÔMETRO DO FOCUS</p>
-<h1 style="margin:0 0 16px;font-family:Georgia,serif;font-size:34px;line-height:1.15;font-weight:normal;color:{COR['texto']}">A semana nas expectativas</h1>
+<table role="presentation" cellspacing="0" cellpadding="0" style="margin:0 0 18px;background:#ffffff"><tr>
+<td width="40" height="40" align="center" bgcolor="{COR['marca']}" aria-hidden="true" style="width:40px;height:40px;background:{COR['marca']};color:#ffffff;font-family:Georgia,serif;font-size:30px;line-height:40px">C</td>
+<td style="padding-left:10px;background:#ffffff;color:{COR['marca']}"><h1 style="margin:0;font-family:Georgia,serif;font-size:22px;font-weight:normal;letter-spacing:2px">COMPASSO</h1><span style="font-size:11px;letter-spacing:1px">TERMÔMETRO DO FOCUS</span></td>
+</tr></table>
 <p style="margin:0;font-size:16px;color:{COR['marca']};font-weight:bold">Relatório Focus de {data}</p>
 <p style="margin:6px 0 0;font-size:14px;color:{COR['suave']}">Gerado em {_esc(resumo.get('gerado_em'))} · Banco Central do Brasil</p>
 </td></tr>{corpo}

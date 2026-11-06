@@ -21,3 +21,4 @@ desktop.ini
 
 # Saídas geradas pelos scripts do caminho avançado
 avancado/**/saida/
+agendar/ultima_execucao.log

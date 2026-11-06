@@ -79,8 +79,8 @@ def main() -> None:
 
     if not args.sem_email:
         from enviar_email import enviar
-        imagens = [p for p in [SAIDA / "acuracia.png"] if p.exists()]
-        para = enviar(f"Termômetro do Focus — {resumo['data_focus']}", relatorio, imagens)
+        # o gráfico já vai em base64 dentro do relatório; o enviar() o converte em Content-ID
+        para = enviar(f"Termômetro do Focus — {resumo['data_focus']}", relatorio)
         print("7. E-mail enviado para", ", ".join(para))
 
 
